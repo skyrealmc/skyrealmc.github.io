@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Realms SMP Store | Minecraft Bedrock Server</title>
+    <meta name="description" content="Purchase ranks, perks and cosmetics for Sky Realms SMP Minecraft Bedrock server">
+    <meta name="keywords" content="minecraft server store, bedrock ranks, minecraft perks, sky realms smp">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.ibb.co/S4T1pHF7/logo-scoreboard.png" type="image/png">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <style>
+        :root {
+            --primary: #59c3ff;
+            --primary-dark: #3a9bd6;
+            --secondary: #f0c420;
+            --dark: #001f3f;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --discord: #5865F2;
+            --discord-dark: #36393f;
+            --discord-light: #f5f5f5;
+            --font-title: 'Bangers', cursive;
+            --font-body: 'Poppins', sans-serif;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font-body);
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.no-scroll {
+            overflow: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-title);
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .section {
+            padding: 3rem 0;
+        }
+        @media (min-width: 768px) {
+            .section {
+                padding: 5rem 0;
+            }
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .section-header {
+                margin-bottom: 3rem;
+            }
+        }
+        .section-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        .section-header p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--gray);
+            margin-top: 1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+        }
+        .btn-secondary:hover {
+            background-color: var(--dark);
+            color: white;
+        }
+        .btn-discord {
+            background-color: var(--discord);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        .btn-discord:hover {
+            background-color: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-help {
+            background-color: var(--secondary);
+            color: var(--dark);
+            box-shadow: var(--shadow);
+        }
+        .btn-help:hover {
+            background-color: #e0b41c;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.8rem 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: var(--font-title);
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+        @media (min-width: 768px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+        .logo img {
+            height: 40px;
+            width: 40px;
+            margin-right: 0.5rem;
+            object-fit: contain;
+        }
+        @media (min-width: 768px) {
+            .logo img {
+                height: 50px;
+                width: 50px;
+                margin-right: 0.8rem;
+            }
+        }
+        .nav-list {
+            display: flex;
+            align-items: center;
+        }
+        .nav-list li {
+            margin-left: 1.5rem;
+        }
+        @media (min-width: 992px) {
+            .nav-list li {
+                margin-left: 2rem;
+            }
+        }
+        .nav-list a {
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .nav-list a {
+                font-size: 1rem;
+            }
+        }
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+        .nav-cta {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-cta .btn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.8rem;
+        }
+        @media (min-width: 768px) {
+            .nav-cta .btn {
+                padding: 0.6rem 1.5rem;
+            }
+        }
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--dark);
+            transition: var(--transition);
+        }
+        /* Store Hero Section */
+        .store-hero {
+            position: relative;
+            height: 50vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(89, 195, 255, 0.2) 0%, rgba(166, 240, 255, 0.1) 100%);
+            overflow: hidden;
+            padding-top: 70px;
+        }
+        @media (min-width: 768px) {
+            .store-hero {
+                height: 60vh;
+                padding-top: 80px;
+            }
+        }
+        .store-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F74%2Fac%2F3f%2F74ac3f8866adf38690ff58d0c6a364d3.jpg&f=1&nofb=1&ipt=5c8f52cb47de656166337107dd5e45a87a8d33b1e32a621081404a269c7c5b79') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .store-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 1rem;
+        }
+        .store-hero-title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 1rem;
+            color: var(--dark);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
+        }
+        .store-hero-title span {
+            color: var(--primary);
+        }
+        .store-hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            margin-bottom: 2rem;
+            color: var(--dark);
+            font-weight: 300;
+        }
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        .hero-buttons .btn {
+            flex: 1 1 auto;
+            min-width: 150px;
+        }
+        /* Store Categories */
+        .store-categories {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        @media (min-width: 768px) {
+            .store-categories {
+                gap: 1rem;
+                margin-bottom: 3rem;
+            }
+        }
+        .store-category-btn {
+            padding: 0.7rem 1.2rem;
+            background-color: white;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        @media (min-width: 768px) {
+            .store-category-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        .store-category-btn.active,
+        .store-category-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        /* Store Items Grid */
+        .store-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .store-items {
+                gap: 2rem;
+            }
+        }
+        .store-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .store-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .store-item-header {
+            position: relative;
+            height: 150px;
+            overflow: hidden;
+        }
+        .store-item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .store-item:hover .store-item-image {
+            transform: scale(1.05);
+        }
+        .store-item-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .store-item-content {
+            padding: 1.2rem;
+        }
+        @media (min-width: 768px) {
+            .store-item-content {
+                padding: 1.5rem;
+            }
+        }
+        .store-item-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        @media (min-width: 768px) {
+            .store-item-title {
+                font-size: 1.3rem;
+            }
+        }
+        .store-item-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .store-item-price {
+                font-size: 1.5rem;
+            }
+        }
+        .store-item-price span {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: normal;
+        }
+        .store-item-features {
+            margin-bottom: 1.2rem;
+        }
+        .store-item-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .store-item-feature i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+        .store-item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .store-item-btn {
+            flex: 1;
+            padding: 0.7rem;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        @media (min-width: 768px) {
+            .store-item-btn {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+        .store-item-btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        .store-item-btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        .store-item-btn-secondary {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        .store-item-btn-secondary:hover {
+            background-color: #e9ecef;
+        }
+        /* Store FAQ */
+        .store-faq {
+            background-color: #f9f9f9;
+        }
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .faq-item:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        .faq-question {
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+        @media (min-width: 768px) {
+            .faq-question {
+                padding: 1.5rem;
+            }
+        }
+        .faq-question:hover {
+            background-color: #f0f0f0;
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        @media (min-width: 768px) {
+            .faq-answer {
+                padding: 0 1.5rem;
+            }
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 1.2rem 1.2rem;
+            max-height: 500px;
+        }
+        @media (min-width: 768px) {
+            .faq-item.active .faq-answer {
+                padding: 0 1.5rem 1.5rem;
+            }
+        }
+        .faq-answer p,
+        .faq-answer ol,
+        .faq-answer ul {
+            margin-bottom: 1rem;
+        }
+        .faq-answer ol,
+        .faq-answer ul {
+            padding-left: 1.5rem;
+        }
+        .faq-answer li {
+            margin-bottom: 0.5rem;
+        }
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        @media (min-width: 768px) {
+            .payment-methods {
+                gap: 1.5rem;
+                margin-top: 3rem;
+            }
+        }
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .payment-method {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+        .payment-method i {
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        @media (min-width: 768px) {
+            .payment-method i {
+                font-size: 1.5rem;
+            }
+        }
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 0;
+            margin-top: auto;
+        }
+        @media (min-width: 768px) {
+            .footer {
+                padding: 4rem 0 0;
+            }
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+                margin-bottom: 3rem;
+            }
+        }
+        @media (min-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .footer-logo {
+                margin-bottom: 2rem;
+            }
+        }
+        .footer-logo img {
+            height: 50px;
+            width: 50px;
+            margin-bottom: 1rem;
+            object-fit: contain;
+        }
+        @media (min-width: 768px) {
+            .footer-logo img {
+                height: 60px;
+                width: 60px;
+            }
+        }
+        .footer-logo h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .footer-logo h3 {
+                font-size: 1.5rem;
+            }
+        }
+        .footer-logo p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .footer-logo p {
+                font-size: 1rem;
+            }
+        }
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .footer-links h4 {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        .footer-links ul li {
+            margin-bottom: 0.7rem;
+        }
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .footer-links ul li a {
+                font-size: 1rem;
+            }
+        }
+        .footer-links ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        .footer-social h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .footer-social h4 {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+        .footer-social h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        .social-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .social-icons {
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+        }
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        @media (min-width: 768px) {
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        .server-info-footer p {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .server-info-footer p {
+                font-size: 1rem;
+            }
+        }
+        .server-info-footer p strong {
+            color: white;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                padding-top: 2rem;
+            }
+        }
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .footer-bottom p {
+                font-size: 0.9rem;
+                text-align: left;
+            }
+        }
+        .back-to-top {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--dark);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        @media (min-width: 768px) {
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        /* Mobile Menu Styles */
+        @media (max-width: 767px) {
+            .menu-toggle {
+                display: block;
+            }
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            .nav-list {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 1.5rem 0;
+                transition: var(--transition);
+            }
+            .nav-list.active {
+                left: 0;
+            }
+            .nav-list li {
+                margin: 0.8rem 0;
+            }
+            .nav-cta {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 1.5rem;
+                margin-top: 1rem;
+            }
+            .nav-cta .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            .store-hero {
+                height: 45vh;
+                min-height: 350px;
+            }
+            .store-hero-title {
+                font-size: 2.2rem;
+            }
+            .store-hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .store-item-actions {
+                flex-direction: column;
+            }
+        }
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .store-hero {
+                height: 40vh;
+                min-height: 300px;
+            }
+            .store-hero-title {
+                font-size: 1.8rem;
+            }
+            .store-hero-subtitle {
+                font-size: 1rem;
+            }
+            .hero-buttons .btn {
+                min-width: 120px;
+                padding: 0.7rem 1rem;
+            }
+            .store-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://i.ibb.co/jP1bsv8V/file-0000000028d461f8870ba8131105f9ab.png" alt="Sky Realms Logo" loading="lazy">
+                <span>Sky Realms SMP</span>
+            </a>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#media">Media</a></li>
+                <li><a href="index.html#join">Join</a></li>
+                <li><a href="index.html#rules">Rules</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#help">Help</a></li>
+                <li><a href="index.html#discord">Discord</a></li>
+                <li class="nav-cta">
+                    <a href="#store" class="btn btn-primary">Store</a>
+                    <a href="index.html#help" class="btn btn-help">Help</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Store Hero Section -->
+    <section class="store-hero" id="store">
+        <div class="container">
+            <div class="store-hero-content">
+                <h1 class="store-hero-title">Sky Realms <span>Store</span></h1>
+                <p class="store-hero-subtitle">Enhance your gameplay with ranks, cosmetics and perks</p>
+                <div class="hero-buttons">
+                    <a href="#ranks" class="btn btn-primary">View Ranks</a>
+                    <a href="#cosmetics" class="btn btn-secondary">
+                        <i class="fas fa-star"></i> Cosmetics
+                    </a>
+                    <a href="#discord-perks" class="btn btn-help">
+                        <i class="fab fa-discord"></i> Discord Perks
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Store Categories -->
+    <section class="section">
+        <div class="container">
+            <div class="store-categories">
+                <button class="store-category-btn active" data-category="all">All Items</button>
+                <button class="store-category-btn" data-category="ranks">Ranks</button>
+                <button class="store-category-btn" data-category="cosmetics">Cosmetics</button>
+                <button class="store-category-btn" data-category="discord">Discord</button>
+                <button class="store-category-btn" data-category="bundles">Bundles</button>
+            </div>
+            <!-- Ranks Section -->
+            <div class="section-header" id="ranks">
+                <h2>Server Ranks</h2>
+                <p>Unlock special permissions and abilities with our premium ranks</p>
+            </div>
+            <div class="store-items">
+                <!-- VIP Rank -->
+                <div class="store-item" data-category="ranks">
+                    <div class="store-item-header" style="background-color: #9b59b6;">
+                        <img src="https://i.ibb.co/mQY9dFz/Vip.png" alt="VIP Rank" class="store-item-image" loading="lazy">
+                        <span class="store-item-badge">Popular</span>
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">VIP Rank</h3>
+                        <div class="store-item-price">₹199 <span>one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> /fly command
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 3 Homes
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Colored chat
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Access to VIP island
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 10% Shop discount
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- MVP Rank -->
+                <div class="store-item" data-category="ranks">
+                    <div class="store-item-header" style="background-color: #e74c3c;">
+                        <img src="https://i.ibb.co/SC3hP8H/Mvp.png" alt="MVP Rank" class="store-item-image" loading="lazy">
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">MVP Rank</h3>
+                        <div class="store-item-price">₹499 <span>one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> All VIP perks
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 5 Homes
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Particle effects
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Access to MVP island
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 20% Shop discount
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Legend Rank -->
+                <div class="store-item" data-category="ranks">
+                    <div class="store-item-header" style="background-color: #f39c12;">
+                        <img src="https://i.ibb.co/d0gsNjdr/legend.png" alt="Legend Rank" class="store-item-image" loading="lazy">
+                        <span class="store-item-badge">Best Value</span>
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Legend Rank</h3>
+                        <div class="store-item-price">₹999 <span>one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> All MVP perks
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 10 Homes
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Custom nicknames
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Legend tag in chat
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 30% Shop discount
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Cosmetics Section -->
+            <div class="section-header" id="cosmetics">
+                <h2>Cosmetics</h2>
+                <p>Customize your gameplay experience with unique cosmetics</p>
+            </div>
+            <div class="store-items">
+                <!-- Chat Color -->
+                <div class="store-item" data-category="cosmetics">
+                    <div class="store-item-header" style="background-color: #3498db;">
+                        <img src="https://i.ibb.co/9t7WXJg/chat-color.png" alt="Chat Color" class="store-item-image" loading="lazy">
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Chat Color</h3>
+                        <div class="store-item-price">₹99 <span>one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Choose from 16 colors
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Stand out in chat
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Works with any rank
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Particle Trail -->
+                <div class="store-item" data-category="cosmetics">
+                    <div class="store-item-header" style="background-color: #2ecc71;">
+                        <img src="https://i.ibb.co/9HqYcV0/particles.png" alt="Particle Trail" class="store-item-image" loading="lazy">
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Particle Trail</h3>
+                        <div class="store-item-price">₹149 <span>one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 8 different effects
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Toggle on/off
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Change anytime
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pet Companion -->
+                <div class="store-item" data-category="cosmetics">
+                    <div class="store-item-header" style="background-color: #e67e22;">
+                        <img src="https://i.ibb.co/8Xz4M4W/pet.png" alt="Pet Companion" class="store-item-image" loading="lazy">
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Pet Companion</h3>
+                        <div class="store-item-price">₹249 <span>one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Choose your pet
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Follows you everywhere
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Custom name
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Special effects
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Discord Perks Section -->
+            <div class="section-header" id="discord-perks">
+                <h2>Discord Perks</h2>
+                <p>Enhance your Discord experience with special roles and features</p>
+            </div>
+            <div class="store-items">
+                <!-- Discord VIP Role -->
+                <div class="store-item" data-category="discord">
+                    <div class="store-item-header" style="background-color: #5865F2;">
+                        <img src="https://i.ibb.co/2P1pY0d/discord-vip.png" alt="Discord VIP" class="store-item-image" loading="lazy">
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Discord VIP Role</h3>
+                        <div class="store-item-price">₹99 <span>one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Special color role
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Access to VIP channels
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Priority support
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Custom emoji access
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Discord Booster -->
+                <div class="store-item" data-category="discord">
+                    <div class="store-item-header" style="background-color: #FF73FA;">
+                        <img src="https://i.ibb.co/1dY1h3x/discord-boost.png" alt="Discord Booster" class="store-item-image" loading="lazy">
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Discord Booster</h3>
+                        <div class="store-item-price">₹299 <span>per month</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Server booster perks
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Special badge
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Animated avatar
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 50MB upload limit
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Custom Discord Tag -->
+                <div class="store-item" data-category="discord">
+                    <div class="store-item-header" style="background-color: #57F287;">
+                        <img src="https://i.ibb.co/3kZ2Qy3/discord-tag.png" alt="Custom Discord Tag" class="store-item-image" loading="lazy">
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Custom Discord Tag</h3>
+                        <div class="store-item-price">₹199 <span>one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Custom nickname color
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Special role in Discord
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Appears at top of member list
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Stand out in the community
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bundles Section -->
+            <div class="section-header">
+                <h2>Special Bundles</h2>
+                <p>Get more for less with these discounted packages</p>
+            </div>
+            <div class="store-items">
+                <!-- Starter Bundle -->
+                <div class="store-item" data-category="bundles">
+                    <div class="store-item-header" style="background-color: #1abc9c;">
+                        <img src="https://i.ibb.co/7W0wT9h/starter-bundle.png" alt="Starter Bundle" class="store-item-image" loading="lazy">
+                        <span class="store-item-badge">Save 20%</span>
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Starter Bundle</h3>
+                        <div class="store-item-price">₹399 <span><s>₹499</s> one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> VIP Rank
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Chat Color
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 10,000 in-game coins
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Starter kit
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ultimate Bundle -->
+                <div class="store-item" data-category="bundles">
+                    <div class="store-item-header" style="background-color: #e74c3c;">
+                        <img src="https://i.ibb.co/6Yb0v1N/ultimate-bundle.png" alt="Ultimate Bundle" class="store-item-image" loading="lazy">
+                        <span class="store-item-badge">Save 30%</span>
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Ultimate Bundle</h3>
+                        <div class="store-item-price">₹1,299 <span><s>₹1,899</s> one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Legend Rank
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Particle Trail
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Pet Companion
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 50,000 in-game coins
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Ultimate starter kit
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Discord Bundle -->
+                <div class="store-item" data-category="bundles">
+                    <div class="store-item-header" style="background-color: #7289DA;">
+                        <img src="https://i.ibb.co/2P1pY0d/discord-vip.png" alt="Discord Bundle" class="store-item-image" loading="lazy">
+                        <span class="store-item-badge">Save 25%</span>
+                    </div>
+                    <div class="store-item-content">
+                        <h3 class="store-item-title">Discord Bundle</h3>
+                        <div class="store-item-price">₹499 <span><s>₹699</s> one-time</span></div>
+                        <div class="store-item-features">
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Discord VIP Role
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Custom Discord Tag
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> 1 Month Booster
+                            </div>
+                            <div class="store-item-feature">
+                                <i class="fas fa-check"></i> Special Discord channel access
+                            </div>
+                        </div>
+                        <div class="store-item-actions">
+                            <a href="#" class="store-item-btn store-item-btn-primary">Buy Now</a>
+                            <a href="#" class="store-item-btn store-item-btn-secondary">More Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Store FAQ Section -->
+    <section class="store-faq section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common store questions</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I purchase items from the store?
+                </div>
+                <div class="faq-answer">
+                    <p>To purchase items:</p>
+                    <ol>
+                        <li>Click the "Buy Now" button on the item you want</li>
+                        <li>You'll be redirected to our secure payment portal</li>
+                        <li>Choose your payment method (UPI, Credit Card, etc.)</li>
+                        <li>Complete the payment process</li>
+                        <li>Your purchase will be delivered within 24 hours</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What payment methods do you accept?
+                </div>
+                <div class="faq-answer">
+                    <p>We accept the following payment methods:</p>
+                    <ul>
+                        <li>UPI (PhonePe, Google Pay, Paytm)</li>
+                        <li>Credit/Debit Cards</li>
+                        <li>Net Banking</li>
+                        <li>PayPal (for international payments)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How long does it take to receive my purchase?
+                </div>
+                <div class="faq-answer">
+                    <p>Most purchases are delivered within 24 hours. Here's what to expect:</p>
+                    <ul>
+                        <li>Ranks and cosmetics: Delivered within 1-12 hours</li>
+                        <li>Discord perks: Delivered within 1-6 hours</li>
+                        <li>Bundles: Delivered within 6-24 hours</li>
+                    </ul>
+                    <p>If you haven't received your purchase after 24 hours, please contact our support team.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I get a refund for my purchase?
+                </div>
+                <div class="faq-answer">
+                    <p>Our refund policy is as follows:</p>
+                    <ul>
+                        <li>Full refunds are available within 48 hours of purchase if the item hasn't been delivered</li>
+                        <li>Partial refunds may be available in special circumstances</li>
+                        <li>No refunds for delivered digital items unless there's a technical issue we can't resolve</li>
+                    </ul>
+                    <p>To request a refund, please contact our support team with your purchase details.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do purchases expire or need renewal?
+                </div>
+                <div class="faq-answer">
+                    <p>Most of our items are permanent purchases:</p>
+                    <ul>
+                        <li>Ranks: Permanent (one-time payment)</li>
+                        <li>Cosmetics: Permanent (one-time payment)</li>
+                        <li>Discord Booster: Monthly subscription</li>
+                        <li>In-game coins: Permanent until spent</li>
+                    </ul>
+                    <p>Any items with expiration dates will be clearly marked before purchase.</p>
+                </div>
+            </div>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <i class="fab fa-google-pay"></i>
+                    <span>Google Pay</span>
+                </div>
+                <div class="payment-method">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>UPI</span>
+                </div>
+                <div class="payment-method">
+                    <i class="fab fa-cc-visa"></i>
+                    <span>Visa</span>
+                </div>
+                <div class="payment-method">
+                    <i class="fab fa-cc-mastercard"></i>
+                    <span>Mastercard</span>
+                </div>
+                <div class="payment-method">
+                    <i class="fab fa-paypal"></i>
+                    <span>PayPal</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://i.ibb.co/jP1bsv8V/file-0000000028d461f8870ba8131105f9ab.png" alt="Sky Realms Logo" loading="lazy">
+                    <h3>Sky Realms SMP</h3>
+                    <p>The ultimate Minecraft Bedrock skyblock experience</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#media">Media</a></li>
+                        <li><a href="index.html#join">How to Join</a></li>
+                        <li><a href="index.html#rules">Rules</a></li>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#help">Help</a></li>
+                        <li><a href="#store">Store</a></li>
+                        <li><a href="index.html#discord">Discord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="https://discord.gg/mWXYXYU9vV" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://youtube.com/skyrealms" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://twitter.com/skyrealms" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="server-info-footer">
+                        <p><strong>Server IP:</strong> publish soon</p>
+                        <p><strong>Port:</strong> 19132</p>
+                        <p><strong>Version:</strong> Bedrock 1.21+</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Sky Realms SMP. Not affiliated with Mojang or Microsoft.</p>
+                <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+    <!-- Main JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('mobile-menu');
+            const navList = document.querySelector('.nav-list');
+            menuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navList.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            });
+            // Close mobile menu when clicking a link
+            const navLinks = document.querySelectorAll('.nav-list a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            // Store category filtering
+            const categoryBtns = document.querySelectorAll('.store-category-btn');
+            const storeItems = document.querySelectorAll('.store-item');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    const category = this.dataset.category;
+                    // Filter items
+                    storeItems.forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            // FAQ Accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                    // Close other open items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            // Back to top button
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (backToTopBtn) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTopBtn.style.display = 'flex';
+                    } else {
+                        backToTopBtn.style.display = 'none';
+                    }
+                });
+                backToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
