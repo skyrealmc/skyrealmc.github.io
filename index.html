@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Realms SMP | Minecraft Bedrock Edition Server</title>
+    <meta name="description" content="Join Sky Realms SMP - the ultimate Minecraft Bedrock Edition skyblock survival experience">
+    <meta name="keywords" content="minecraft server, bedrock edition, skyblock, smp, multiplayer">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <!-- Favicon -->
+    <link rel="icon" href="https://i.ibb.co/S4T1pHF7/logo-scoreboard.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <style>
+        :root {
+            --primary: #59c3ff;
+            --primary-dark: #3a9bd6;
+            --secondary: #f0c420;
+            --dark: #001f3f;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --discord: #5865F2;
+            --discord-dark: #36393f;
+            --discord-light: #f5f5f5;
+            --font-title: 'Bangers', cursive;
+            --font-body: 'Poppins', sans-serif;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font-body);
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.no-scroll {
+            overflow: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-title);
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .section {
+            padding: 5rem 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        .section-header p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--gray);
+            margin-top: 1rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+        }
+        .btn-secondary:hover {
+            background-color: var(--dark);
+            color: white;
+        }
+        .btn-discord {
+            background-color: var(--discord);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        .btn-discord:hover {
+            background-color: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-help {
+            background-color: var(--secondary);
+            color: var(--dark);
+            box-shadow: var(--shadow);
+        }
+        .btn-help:hover {
+            background-color: #e0b41c;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        .logo img {
+            height: 50px;
+            width: 50px;
+            margin-right: 0.8rem;
+            object-fit: contain;
+        }
+        .nav-list {
+            display: flex;
+            align-items: center;
+        }
+        .nav-list li {
+            margin-left: 2rem;
+        }
+        .nav-list a {
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+        .nav-cta {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-cta .btn {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.8rem;
+        }
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--dark);
+            transition: var(--transition);
+        }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(89, 195, 255, 0.2) 0%, rgba(166, 240, 255, 0.1) 100%);
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F74%2Fac%2F3f%2F74ac3f8866adf38690ff58d0c6a364d3.jpg&f=1&nofb=1&ipt=5c8f52cb47de656166337107dd5e45a87a8d33b1e32a621081404a269c7c5b79') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        .clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co/vxYBPpxN/toppng-com-clouds-drawing-png-524x720.png') repeat-x;
+            background-size: cover;
+            animation: cloudsAnimation 120s linear infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        @keyframes cloudsAnimation {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -2000px 0;
+            }
+        }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--dark);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
+        }
+        .hero-title span {
+            color: var(--primary);
+        }
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            color: var(--dark);
+            font-weight: 300;
+        }
+        .server-info {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: inline-block;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 600px;
+            backdrop-filter: blur(5px);
+        }
+        .ip-address {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .ip-address span {
+            font-family: monospace;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: bold;
+            background-color: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        .copy-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .copy-btn:hover {
+            background-color: #e0b41c;
+        }
+        .copy-tooltip {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        .copy-tooltip.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .server-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .player-count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+        .player-count i {
+            color: var(--primary);
+        }
+        .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        .status-dot.online {
+            background-color: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+        .status-dot.offline {
+            background-color: var(--danger);
+            box-shadow: 0 0 10px var(--danger);
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-buttons .btn {
+            min-width: 150px;
+        }
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .feature-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .feature-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature-item p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        /* Video Section */
+        .video-section {
+            background: linear-gradient(135deg, rgba(89, 195, 255, 0.1) 0%, rgba(166, 240, 255, 0.05) 100%);
+        }
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            aspect-ratio: 16/9;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* Join Section */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .step-content p {
+            margin-bottom: 1rem;
+        }
+        .server-ip {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .server-ip input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: monospace;
+            width: 200px;
+            max-width: 100%;
+        }
+        .copy-btn-small {
+            padding: 0.5rem;
+            background-color: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .copy-btn-small:hover {
+            background-color: #002a5a;
+        }
+        .platform-support {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .platform-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .platform-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .platform-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        /* Rules Section */
+        .rules-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .rule-category {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .rule-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .rule-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .rule-category h3 i {
+            margin-right: 0.8rem;
+            color: var(--primary);
+        }
+        .rule-category ul li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .rule-category ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .rules-note {
+            text-align: center;
+            margin-top: 3rem;
+            font-style: italic;
+            color: var(--gray);
+        }
+        /* Features Section */
+        .features-grid.features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .feature-card p {
+            color: var(--gray);
+        }
+        /* Events Section */
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .event-card {
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .event-date {
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 90px;
+        }
+        .event-date .day {
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .event-date .month {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .event-details {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+        .event-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .event-time {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .event-time i {
+            margin-right: 0.5rem;
+        }
+        .event-details p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+        .event-link {
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        .event-link::after {
+            content: '→';
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+        .event-link:hover::after {
+            transform: translateX(3px);
+        }
+        /* Testimonials Section */
+        .testimonials {
+            background: linear-gradient(135deg, rgba(89, 195, 255, 0.1) 0%, rgba(166, 240, 255, 0.05) 100%);
+        }
+        .testimonials-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .testimonial {
+            display: none;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .testimonial-content p {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .testimonial-content p::before,
+        .testimonial-content p::after {
+            content: '"';
+            font-size: 2rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+        .testimonial-content p::before {
+            top: -20px;
+            left: -10px;
+        }
+        .testimonial-content p::after {
+            bottom: -40px;
+            right: -10px;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            border: 3px solid var(--primary);
+        }
+        .testimonial-author span {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        .slider-prev,
+        .slider-next {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .slider-prev:hover,
+        .slider-next:hover {
+            background-color: var(--primary-dark);
+        }
+        .slider-prev {
+            margin-left: -20px;
+        }
+        .slider-next {
+            margin-right: -20px;
+        }
+        /* Help Section */
+        .help-section {
+            background-color: #f9f9f9;
+        }
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .faq-item:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+        .faq-question:hover {
+            background-color: #f0f0f0;
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        .help-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        /* Whitelist Section */
+        .whitelist-section {
+            background: linear-gradient(135deg, rgba(240, 196, 32, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        .form-container iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+        /* Discord CTA Section - Enhanced */
+        .discord-cta {
+            background: linear-gradient(135deg, var(--discord) 0%, #4752c4 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        .discord-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .discord-text h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .discord-text p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .discord-widget-container {
+            display: grid;
+            gap: 2rem;
+        }
+        .widget-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+        .widget-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .widget-title {
+            color: var(--discord);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .widget-description {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+        widgetbot {
+            width: 100% !important;
+            height: 60vh !important;
+            min-height: 400px;
+            max-height: 600px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            display: block;
+        }
+        #crate-widget {
+            width: 100%;
+            min-height: 300px;
+            border-radius: var(--border-radius);
+        }
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 0;
+            margin-top: auto;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-logo {
+            margin-bottom: 2rem;
+        }
+        .footer-logo img {
+            height: 60px;
+            width: 60px;
+            margin-bottom: 1rem;
+            object-fit: contain;
+        }
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer-logo p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+        .footer-links ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        .footer-social h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .footer-social h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        .server-info-footer p {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .server-info-footer p strong {
+            color: white;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        .back-to-top {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content,
+            .discord-content {
+                grid-template-columns: 1fr;
+            }
+            .about-image {
+                order: -1;
+            }
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .rules-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .discord-widget-container {
+                order: -1;
+            }
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            .nav-list {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 2rem 0;
+                transition: var(--transition);
+            }
+            .nav-list.active {
+                left: 0;
+            }
+            .nav-list li {
+                margin: 1rem 0;
+            }
+            .nav-cta {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 2rem;
+            }
+            .nav-cta .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            .rules-container {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            widgetbot {
+                height: 70vh !important;
+                min-height: 300px;
+            }
+            #crate-widget {
+                min-height: 250px;
+            }
+        }
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .ip-address {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .server-ip {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .server-ip input {
+                width: 100%;
+            }
+            .section {
+                padding: 3rem 0;
+            }
+            widgetbot {
+                height: 80vh !important;
+                min-height: 250px;
+            }
+            #crate-widget {
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="https://i.ibb.co/jP1bsv8V/file-0000000028d461f8870ba8131105f9ab.png" alt="Sky Realms Logo" loading="lazy">
+                <span>Sky Realms SMP</span>
+            </a>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#media">Media</a></li>
+                <li><a href="store.html">Store</a></li>
+                <li><a href="#join">Join</a></li>
+                <li><a href="#rules">Rules</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#whitelist">Whitelist</a></li>
+                <li><a href="#help">Help</a></li>
+                <li><a href="#discord">Discord</a></li>
+                <li class="nav-cta">
+                    <a href="#join" class="btn btn-primary">Play Now</a>
+                    <a href="#help" class="btn btn-help">Help</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="clouds"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to <span>Sky Realms SMP</span></h1>
+                <p class="hero-subtitle typewriter">Build. Survive. Thrive in the world of adventure...</p>
+                <div class="server-info">
+                    <div class="ip-address">
+                        <span id="bedrock-ip">skyrealm.run.place</span>
+                        <span id="bedrock-port">4173</span>
+                        <button id="copy-ip" class="btn copy-btn" aria-label="Copy server address">
+                            <i class="fas fa-copy"></i> Copy IP:Port
+                        </button>
+                        <span class="copy-tooltip">Copied!</span>
+                    </div>
+                    <!-- === Minecraft Server Status (Updated Minimal Version) === -->
+                    <!-- Status Display -->
+                    <div class="server-status">
+                        <span class="status-dot offline"></span>
+                        <span id="status-text">Checking...</span>
+                    </div>
+                    <div class="player-count">
+                        <i class="fas fa-users"></i>
+                        <span id="players-online">0/0</span> players online
+                    </div>
+                    <!-- === End Minecraft Server Status === -->
+                </div>
+                <div class="hero-buttons">
+                    <a href="#join" class="btn btn-primary">Join Now</a>
+                    <a href="https://discord.gg/mWXYXYU9vV" target="_blank" class="btn btn-secondary">
+                        <i class="fab fa-discord"></i> Discord
+                    </a>
+                    <a href="#help" class="btn btn-help">
+                        <i class="fas fa-question-circle"></i> Help Center
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Our Server</h2>
+                <p>Discover what makes Sky Realms SMP unique</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://i.ibb.co/1thgZqYF/file-000000005f0061f99600458333e7d7c1.png" alt="Sky Realms gameplay" loading="lazy">
+                </div>
+                <div class="about-text">
+                    <p>Sky Realms SMP is a custom Minecraft Bedrock Edition survival multiplayer server with a sky theme twist. We've created a unique experience that blends survival gameplay with floating islands, custom items, and a thriving economy.</p>
+                    <p>Our Bedrock server supports cross-play across all platforms (Windows 10, Mobile, Xbox, Switch, PS4/5) and has grown into a welcoming community of builders and adventurers.</p>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Cross-Platform</h3>
+                            <p>Play on any Bedrock Edition device</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-cloud"></i>
+                            <h3>Custom ranks</h3>
+                            <p>Unique experience</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-coins"></i>
+                            <h3>Economy</h3>
+                            <p>Player shops and trading</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>Weekly Events</h3>
+                            <p>Regular community activities</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Video Section -->
+    <section class="video-section section" id="media">
+        <div class="container">
+            <div class="section-header">
+                <h2>Server Trailer</h2>
+                <p>See Sky Realms SMP in action</p>
+            </div>
+            <div class="video-container">
+                <iframe width="100%" height="500" 
+                        src="https://www.youtube.com/embed/Jf9Ens9RsXg" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+    <!-- Join Section -->
+    <section class="join section" id="join">
+        <div class="container">
+            <div class="section-header">
+                <h2>How to Join</h2>
+                <p>Start your Sky Realms adventure in just a few steps</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Launch Minecraft</h3>
+                        <p>Open Minecraft Bedrock Edition (version 1.21+)</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Add Our Server</h3>
+                        <p>Go to "Servers" tab and click "Add Server"</p>
+                        <div class="server-ip">
+                            <input type="text" id="server-ip-input" value="skyrealm.run.place" readonly aria-label="Server IP Address">
+                            <input type="text" id="server-port-input" value="4173" readonly aria-label="Server Port">
+                            <button class="btn copy-btn-small" aria-label="Copy server address">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Join & Play!</h3>
+                        <p>Click "Join Server" and start your sky realm journey</p>
+                    </div>
+                </div>
+            </div>
+            <div class="platform-support">
+                <h3>Supported Platforms</h3>
+                <div class="platform-icons">
+                    <div class="platform-icon">
+                        <i class="fab fa-windows"></i>
+                        <span>Windows 10/11</span>
+                    </div>
+                    <div class="platform-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Mobile</span>
+                    </div>
+                    <div class="platform-icon">
+                        <i class="fab fa-xbox"></i>
+                        <span>Xbox</span>
+                    </div>
+                    <div class="platform-icon">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Switch/PS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Rules Section -->
+    <section class="rules section" id="rules">
+        <div class="container">
+            <div class="section-header">
+                <h2>Server Rules</h2>
+                <p>Keep our community fun and fair for everyone</p>
+            </div>
+            <div class="rules-container">
+                <div class="rule-category">
+                    <h3><i class="fas fa-user-friends"></i> Behavior</h3>
+                    <ul>
+                        <li>No harassment, hate speech, or discrimination</li>
+                        <li>Be respectful to all players and staff</li>
+                        <li>No spamming in chat</li>
+                    </ul>
+                </div>
+                <div class="rule-category">
+                    <h3><i class="fas fa-gavel"></i> Gameplay</h3>
+                    <ul>
+                        <li>No griefing or stealing</li>
+                        <li>PvP is consensual only</li>
+                        <li>No cheating or hacked clients</li>
+                    </ul>
+                </div>
+                <div class="rule-category">
+                    <h3><i class="fas fa-home"></i> Building</h3>
+                    <ul>
+                        <li>No offensive builds</li>
+                        <li>Keep spawn area clean</li>
+                        <li>No lag machines</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="rules-note">
+                <p>Breaking these rules may result in temporary or permanent bans. Staff decisions are final.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section class="features section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Server Features</h2>
+                <p>What makes Sky Realms SMP special</p>
+            </div>
+            <div class="features-grid features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Custom Sky World</h3>
+                    <p>Explore our hand-crafted world.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Player Shops</h3>
+                    <p>Buy and sell items with our economy system using in-game currency.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Quests & Achievements</h3>
+                    <p>Complete challenges and earn rewards with our custom quest system.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Custom Items</h3>
+                    <p>Discover unique features,loot protection, you won't find anywhere else.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Regular Events</h3>
+                    <p>Participate in building contests, PvP tournaments, and special events.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Grief Prevention</h3>
+                    <p>Your builds are protected with our claim system and active staff.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Whitelist Section -->
+    <section class="whitelist-section section" id="whitelist">
+        <div class="container">
+            <div class="section-header">
+                <h2>Whitelist Application</h2>
+                <p>Apply to join our community</p>
+            </div>
+            <div class="form-container">
+                <iframe src="https://forms.gle/sJYLpDJJB7obgkMU9" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
+        </div>
+    </section>
+    <!-- Help Section -->
+    <section class="help-section section" id="help">
+        <div class="container">
+            <div class="section-header">
+                <h2>Help Center</h2>
+                <p>Find answers to common questions</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I join the server?
+                        <span class="toggle-icon"></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To join our server, follow these steps:</p>
+                        <ol>
+                            <li>Open Minecraft Bedrock Edition (version 1.21 or newer)</li>
+                            <li>Go to the "Servers" tab</li>
+                            <li>Click "Add Server"</li>
+                            <li>Enter the server address: skyrealm.run.place</li>
+                            <li>Enter the port: 4173</li>
+                            <li>Click "Save" and then "Join Server"</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        I'm having connection issues. What should I do?
+                        <span class="toggle-icon"></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If you're having trouble connecting:</p>
+                        <ul>
+                            <li>Make sure you're using the correct IP and port</li>
+                            <li>Check that your Minecraft version is up to date</li>
+                            <li>Restart your game and device</li>
+                            <li>Try connecting at a different time (server may be restarting)</li>
+                            <li>Join our Discord for real-time support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How does the economy system work?
+                        <span class="toggle-icon"></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our server features a player-driven economy:</p>
+                        <ul>
+                            <li>Earn coins by selling items at spawn or completing quests</li>
+                            <li>Use coins to buy items from other players or the server shop</li>
+                            <li>Create your own shop with chests using our shop plugin</li>
+                            <li>Participate in events for bonus coins and rewards</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I claim land to protect my builds?
+                        <span class="toggle-icon"></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To claim land:</p>
+                        <ol>
+                            <li>use !land claim command</li>
+                            <li>Select two opposite corners of the area you want to claim</li>
+                            <li>stand  the first corner with the land claim command</li>
+                            <li>after go to the opposite corner to claim the land</li>
+                            <li>Your land is now protected from griefing(land claim cost in-game currency)</li>
+                        </ol>
+                        <p>Note: You can expand claims as you rich</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I report a player or issue?
+                        <span class="toggle-icon"></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To report issues:</p>
+                        <ul>
+                            <li>In-game: Use !report [player] [reason] or use compass menu</li>
+                            <li>Discord: Open a ticket in our #support channel</li>
+                            <li>Provide evidence (screenshots/videos) when possible</li>
+                            <li>Our staff team will investigate promptly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="help-cta">
+                <p>Still need help? Join our Discord for live support!</p>
+                <a href="https://discord.gg/mWXYXYU9vV" target="_blank" class="btn btn-discord">
+                    <i class="fab fa-discord"></i> Get Help on Discord
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Events Section -->
+    <section class="events section" id="events">
+        <div class="container">
+            <div class="section-header">
+                <h2>Upcoming Events</h2>
+                <p>Join our community activities</p>
+            </div>
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">00</span>
+                        <span class="month">--</span>
+                    </div>
+                    <div class="event-details">
+                        <h3> Build Contest</h3>
+                        <p class="event-time"><i class="far fa-clock"></i> 0:00 PM UTC</p>
+                        <p>Show off your building skills with our themed competition!</p>
+                        <a href="#" class="event-link">More Info</a>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">00</span>
+                        <span class="month">--</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>Dragon Slayer Tournament</h3>
+                        <p class="event-time"><i class="far fa-clock"></i> 0:00 PM UTC</p>
+                        <p>Team up to defeat the Ender Dragon for special rewards!</p>
+                        <a href="#" class="event-link">More Info</a>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">00</span>
+                        <span class="month">--</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>Server Birthday Party</h3>
+                        <p class="event-time"><i class="far fa-clock"></i> 0:00 PM UTC</p>
+                        <p>Celebrate our server anniversary with special giveaways!</p>
+                        <a href="#" class="event-link">More Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="testimonials section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Players Say</h2>
+                <p>Join our growing community</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Sky Realms SMP has the perfect balance of challenge and creativity. The community is amazing and the custom features keep me coming back!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://mc-heads.net/avatar/Steve" alt="Player" loading="lazy">
+                            <span>SkyBuilder42</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"I've played many servers, but this one stands out with its unique and fair economy system. Highly recommend!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://mc-heads.net/avatar/Alex" alt="Player" loading="lazy">
+                            <span>RedstoneQueen</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial active">
+                    <div class="testimonial-content">
+                        <p>"The weekly events are so much fun! The staff team is always active and helpful. Best SMP experience I've had in years."</p>
+                        <div class="testimonial-author">
+                            <img src="https://mc-heads.net/avatar/MHF_Enderman" alt="Player" loading="lazy">
+                            <span>EndyWarrior</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-prev" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-next" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Enhanced Discord CTA Section -->
+    <section class="discord-cta section" id="discord">
+        <div class="container">
+            <div class="discord-content">
+                <div class="discord-text">
+                    <h2>Join Our Community</h2>
+                    <p>Connect with hundreds of players in our Discord community. Get server updates, participate in exclusive events, and make new friends!</p>
+                    <a href="https://discord.gg/gnanqEJnCD" target="_blank" class="btn btn-discord">
+                        <i class="fab fa-discord"></i> Join Discord
+                    </a>
+                </div>
+                <div class="discord-widget-container">
+                    <div class="widget-container">
+                        <h3 class="widget-title">Live Community Chat</h3>
+                        <p class="widget-description">
+                            Connect with other members in real-time through our Discord chat. Share your experiences, 
+                            ask questions, and be part of the conversation!
+                        </p>
+                        <!-- Main chat widget -->
+                        <widgetbot
+                            server="1378690510801342524"
+                            channel="1398776842680406147"
+                            width="800"
+                            height="600"
+                        ></widgetbot>
+                    </div>
+                    <div class="widget-container">
+                        <h3 class="widget-title">Quick Access</h3>
+                        <p class="widget-description">
+                            Use this compact widget to quickly join the conversation without leaving our website.
+                            Perfect for quick messages and checking recent activity.
+                        </p>
+                        <!-- Crate widget will be injected here by the script -->
+                        <div id="crate-widget"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://i.ibb.co/jP1bsv8V/file-0000000028d461f8870ba8131105f9ab.png" alt="Sky Realms Logo" loading="lazy">
+                    <h3>Sky Realms SMP</h3>
+                    <p>The ultimate Minecraft Bedrock skyblock experience</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#media">Media</a></li>
+                        <li><a href="#join">How to Join</a></li>
+                        <li><a href="#rules">Rules</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#whitelist">Whitelist</a></li>
+                        <li><a href="#help">Help</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#discord">Discord</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="https://discord.gg/mWXYXYU9vV" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://youtube.com/skyrealms" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://twitter.com/skyrealms" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="server-info-footer">
+                        <p><strong>Server IP:</strong> skyrealm.run.place</p>
+                        <p><strong>Port:</strong> 4173</p>
+                        <p><strong>Version:</strong> Bedrock 1.21+</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Sky Realms SMP. Not affiliated with Mojang or Microsoft.</p>
+                <button id="back-to-top" class="back-to-top" aria-label="Back to top" style="display: flex;">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+    <!-- Script for the main chat widget -->
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+    <!-- Script for the Crate widget (placed at bottom of body as recommended) -->
+    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
+        new Crate({
+            server: '1378690510801342524', // SKY REALMS
+            channel: '1398776842680406147', // #general-chat
+            element: document.getElementById('crate-widget'),
+            shard: 'https://disweb.deploys.io'
+        })
+    </script>
+    <!-- Main JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('mobile-menu');
+            const navList = document.querySelector('.nav-list');
+            menuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navList.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            });
+            // Close mobile menu when clicking a link
+            const navLinks = document.querySelectorAll('.nav-list a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            // Copy IP button functionality
+            const copyIpBtn = document.getElementById('copy-ip');
+            const copyTooltip = document.querySelector('.copy-tooltip');
+            if (copyIpBtn) {
+                copyIpBtn.addEventListener('click', function() {
+                    const ip = document.getElementById('bedrock-ip').textContent;
+                    const port = document.getElementById('bedrock-port').textContent;
+                    const fullAddress = `${ip}:${port}`;
+                    navigator.clipboard.writeText(fullAddress).then(function() {
+                        copyTooltip.classList.add('show');
+                        setTimeout(function() {
+                            copyTooltip.classList.remove('show');
+                        }, 2000);
+                    });
+                });
+            }
+            // Copy small IP button functionality
+            const copySmallIpBtn = document.querySelector('.copy-btn-small');
+            if (copySmallIpBtn) {
+                copySmallIpBtn.addEventListener('click', function() {
+                    const ip = document.getElementById('server-ip-input').value;
+                    const port = document.getElementById('server-port-input').value;
+                    const fullAddress = `${ip}:${port}`;
+                    navigator.clipboard.writeText(fullAddress).then(function() {
+                        const originalText = copySmallIpBtn.innerHTML;
+                        copySmallIpBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        setTimeout(function() {
+                            copySmallIpBtn.innerHTML = originalText;
+                        }, 2000);
+                    });
+                });
+            }
+            // Testimonial slider
+            const testimonials = document.querySelectorAll('.testimonial');
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+            let currentTestimonial = 0;
+            function showTestimonial(index) {
+                testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+                testimonials[index].classList.add('active');
+            }
+            if (prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', function() {
+                    currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+                    showTestimonial(currentTestimonial);
+                });
+                nextBtn.addEventListener('click', function() {
+                    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                    showTestimonial(currentTestimonial);
+                });
+            }
+            // Auto-rotate testimonials
+            let testimonialInterval = setInterval(function() {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+            // Pause auto-rotation on hover
+            const slider = document.querySelector('.testimonials-slider');
+            if (slider) {
+                slider.addEventListener('mouseenter', function() {
+                    clearInterval(testimonialInterval);
+                });
+                slider.addEventListener('mouseleave', function() {
+                    testimonialInterval = setInterval(function() {
+                        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                        showTestimonial(currentTestimonial);
+                    }, 5000);
+                });
+            }
+            // Back to top button
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (backToTopBtn) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTopBtn.style.display = 'flex';
+                    } else {
+                        backToTopBtn.style.display = 'none';
+                    }
+                });
+                backToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            // Typewriter effect for hero subtitle
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            if (heroSubtitle) {
+                const text = heroSubtitle.textContent;
+                heroSubtitle.textContent = '';
+                let i = 0;
+                function typeWriter() {
+                    if (i < text.length) {
+                        heroSubtitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                setTimeout(typeWriter, 1000);
+            }
+            // FAQ Accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                    // Close other open items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- === Minecraft Server Status (Updated Minimal Version) === -->
+    <!-- Status Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        async function updateServerStatus() {
+            const ip = "94.136.191.17";
+            const port = 4173;
+            const url = `https://api.mcstatus.io/v2/status/bedrock/${ip}/${port}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const statusText = document.getElementById("status-text");
+                const statusDot = document.querySelector(".status-dot");
+                const playersOnline = document.getElementById("players-online");
+
+                if (data.online) {
+                    statusText.textContent = "Online";
+                    statusDot.classList.remove("offline");
+                    statusDot.classList.add("online");
+                    playersOnline.textContent = `${data.players.online}/${data.players.max}`;
+                } else {
+                    statusText.textContent = "Offline";
+                    statusDot.classList.remove("online");
+                    statusDot.classList.add("offline");
+                    playersOnline.textContent = "0/0";
+                }
+            } catch (error) {
+                console.error("Error fetching server status:", error);
+                document.getElementById("status-text").textContent = "Unknown";
+                document.querySelector(".status-dot").className = "status-dot offline";
+                document.getElementById("players-online").textContent = "0/0";
+            }
+        }
+
+        // Run on load + refresh every 30s
+        updateServerStatus();
+        setInterval(updateServerStatus, 30000);
+    });
+    </script>
+    <!-- === End Minecraft Server Status === -->
+</body>
+</html>
