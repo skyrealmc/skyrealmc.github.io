@@ -1,45 +1,40 @@
 /**
  * Sky Realms SMP - Redeem JavaScript
- * Code redemption functionality
+ * Code redemption and purchase CTA handling
  */
 
-// ========================================
-// Mock Code Data
-// ========================================
+const STORAGE_KEY = 'skyrealms-used-codes-v1';
+
 const redeemCodes = [
     {
-        code: "VIP2026",
-        reward: "VIP Rank",
-        description: "Unlocks VIP rank with /fly and 3 homes"
+        code: 'VIP2026',
+        reward: 'VIP Rank',
+        description: 'Unlocks VIP rank with /fly and 3 homes'
     },
     {
-        code: "STARTER50",
-        reward: "Starter Bundle",
-        description: "Diamond tools + 50k in-game money"
+        code: 'STARTER50',
+        reward: 'Starter Bundle',
+        description: 'Diamond tools + 50k in-game money'
     },
     {
-        code: "MVP2026",
-        reward: "MVP Rank",
-        description: "Unlimited /fly, /homes, and access to /nick"
+        code: 'MVP2026',
+        reward: 'MVP Rank',
+        description: 'Unlimited /fly, /homes, and access to /nick'
     },
     {
-        code: "FREE5000",
-        reward: "5000 Coins",
-        description: "5000 in-game coins to get started"
+        code: 'FREE5000',
+        reward: '5000 Coins',
+        description: '5000 in-game coins to get started'
     },
     {
-        code: "WELCOME",
-        reward: "Welcome Pack",
-        description: "Starter items + 24 hour VIP trial"
+        code: 'WELCOME',
+        reward: 'Welcome Pack',
+        description: 'Starter items + 24 hour VIP trial'
     }
 ];
 
-// Track used codes (client-side only - mock)
 const usedCodes = new Set();
 
-// ========================================
-// DOM Elements
-// ========================================
 let redeemCard;
 let redeemIcon;
 let redeemInput;
@@ -48,15 +43,13 @@ let redeemResult;
 let rewardTitle;
 let rewardDescription;
 
-// ========================================
-// Initialize on DOM Ready
-// ========================================
 document.addEventListener('DOMContentLoaded', () => {
+    loadUsedCodes();
     initRedeem();
+    initBuyCodeButtons();
 });
 
 function initRedeem() {
-    // Get DOM elements
     redeemCard = document.getElementById('redeemCard');
     redeemIcon = document.getElementById('redeemIcon');
     redeemInput = document.getElementById('redeemCode');
@@ -65,129 +58,127 @@ function initRedeem() {
     rewardTitle = document.getElementById('rewardTitle');
     rewardDescription = document.getElementById('rewardDescription');
 
-    // Add Enter key listener
+    const redeemSubmit = document.getElementById('redeemSubmit');
+    if (redeemSubmit) {
+        redeemSubmit.addEventListener('click', redeemCode);
+    }
+
     if (redeemInput) {
-        redeemInput.addEventListener('keypress', (e) => {
+        redeemInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 redeemCode();
             }
         });
 
-        // Clear error when typing
-        redeemInput.addEventListener('input', () => {
-            clearMessages();
-        });
+        redeemInput.addEventListener('input', clearMessages);
     }
 }
 
-/**
- * Main redeem function
- */
+function loadUsedCodes() {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) return;
+        JSON.parse(stored).forEach((code) => usedCodes.add(code));
+    } catch (error) {
+        console.warn('Failed to load redeemed codes from local storage', error);
+    }
+}
+
+function saveUsedCodes() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(usedCodes)));
+    } catch (error) {
+        console.warn('Failed to save redeemed codes to local storage', error);
+    }
+}
+
 function redeemCode() {
+    if (!redeemInput) return;
+
     const code = redeemInput.value.trim().toUpperCase();
 
-    // Validate input
     if (!code) {
-        showError("Please enter a redeem code!");
+        showError('Please enter a redeem code!');
         return;
     }
 
-    // Check if code was already used
     if (usedCodes.has(code)) {
-        showError("This code has already been redeemed!");
+        showError('This code has already been redeemed!');
         return;
     }
 
-    // Find the code in our database
-    const foundCode = redeemCodes.find(c => c.code === code);
+    const foundCode = redeemCodes.find((entry) => entry.code === code);
 
-    if (foundCode) {
-        // Success!
-        showSuccess(foundCode);
-        
-        // Mark code as used (client-side mock)
-        usedCodes.add(code);
-        
-        /**
-         * DATABASE VALIDATION PLACEHOLDER
-         * 
-         * When connecting to backend:
-         * - Send code to server for validation
-         * - Check code validity and usage status
-         * - Update code as used in database
-         * - Add reward to user's inventory
-         * 
-         * Example:
-         * 
-         * async function validateCode(code) {
-         *     const response = await fetch(`${API_BASE}/redeem/validate`, {
-         *         method: 'POST',
-         *         headers: {
-         *             'Content-Type': 'application/json',
-         *             'Authorization': `Bearer ${userToken}`
-         *         },
-         *         body: JSON.stringify({ code: code })
-         *     });
-         *     return response.json();
-         * }
-         */
-    } else {
-        // Invalid code
-        showError("Invalid code! Please check and try again.");
+    if (!foundCode) {
+        showError('Invalid code! Please check and try again.');
+        return;
     }
+
+    usedCodes.add(code);
+    saveUsedCodes();
+    showSuccess(foundCode);
+}
+
+function initBuyCodeButtons() {
+    const triggers = document.querySelectorAll('.buy-code-trigger');
+    triggers.forEach((button) => {
+        button.addEventListener('click', () => {
+            const card = button.closest('.code-product');
+            if (!card) return;
+
+            const code = card.querySelector('.code-text')?.textContent?.trim() || 'N/A';
+            const itemName = card.querySelector('.code-name')?.textContent?.trim() || 'Unknown Item';
+            const priceText = card.querySelector('.code-value')?.textContent || '';
+            const price = Number(priceText.replace(/[^0-9.]/g, '')) || 0;
+
+            buyCode(code, itemName, price);
+        });
+    });
 }
 
 /**
- * Show success state
- * @param {Object} reward - Reward object
+ * PAYMENT INTEGRATION PLACEHOLDER
+ * Replace with backend-driven payment flow.
  */
+function buyCode(code, itemName, price) {
+    alert(
+        'Payment system coming soon!\n\nCode: ' +
+            code +
+            '\nItem: ' +
+            itemName +
+            '\nPrice: \u20b9' +
+            price
+    );
+}
+
 function showSuccess(reward) {
-    // Clear previous states
     clearMessages();
 
-    // Update card styling
     redeemCard.classList.remove('error');
     redeemCard.classList.add('success');
-
-    // Update icon
     redeemIcon.textContent = '🎉';
 
-    // Show reward details
     rewardTitle.textContent = '🎉 ' + reward.reward + ' Unlocked!';
     rewardDescription.textContent = reward.description;
 
-    // Show result
     redeemResult.classList.add('show');
     redeemError.classList.remove('show');
 
-    // Clear input
     redeemInput.value = '';
 }
 
-/**
- * Show error state
- * @param {string} message - Error message
- */
 function showError(message) {
-    // Clear previous states
     clearMessages();
 
-    // Update card styling
     redeemCard.classList.remove('success');
     redeemCard.classList.add('error');
-
-    // Update icon
     redeemIcon.textContent = '❌';
 
-    // Show error message
     redeemError.textContent = '❌ ' + message;
     redeemError.classList.add('show');
     redeemResult.classList.remove('show');
 }
 
-/**
- * Clear all messages and reset state
- */
 function clearMessages() {
     if (redeemCard) {
         redeemCard.classList.remove('success', 'error');
@@ -203,9 +194,6 @@ function clearMessages() {
     }
 }
 
-/**
- * Reset the redeem form
- */
 function resetForm() {
     clearMessages();
     if (redeemInput) {
@@ -214,14 +202,13 @@ function resetForm() {
     }
 }
 
-// Export functions for global access
 window.redeemCode = redeemCode;
 window.resetForm = resetForm;
-
-// Export for testing
+window.buyCode = buyCode;
 window.RedeemFunctions = {
     redeemCode,
     resetForm,
+    buyCode,
     redeemCodes,
     usedCodes
 };

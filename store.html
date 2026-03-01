@@ -5,18 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store | Sky Realms SMP – Season 2</title>
     <meta name="description" content="Support Sky Realms SMP by purchasing ranks, bundles, cosmetics and special items.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <meta name="theme-color" content="#7B2FF7">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">Sky Realms SMP</a>
-        <div class="hamburger" id="hamburger">
+        <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-controls="navLinks" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="store.html" class="active">Store</a></li>
@@ -29,6 +33,10 @@
     <header class="store-header">
         <h1 class="store-title">Server Store</h1>
         <p class="store-subtitle">Support the server and get exclusive perks!</p>
+        <div class="store-search">
+            <label for="storeSearch" class="sr-only">Search store items</label>
+            <input id="storeSearch" class="store-search-input" type="search" placeholder="Search ranks, bundles, and items...">
+        </div>
     </header>
 
     <!-- Category Filters -->
@@ -55,7 +63,7 @@
                     <li>Exclusive VIP shops</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('VIP Rank', 149)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -73,7 +81,7 @@
                     <li>Claim 5 chunks</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('VIP+ Rank', 299)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -91,7 +99,7 @@
                     <li>Access to /nick</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('MVP Rank', 499)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -109,7 +117,7 @@
                     <li>Exclusive kits</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('MVP+ Rank', 799)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -127,7 +135,7 @@
                     <li>Custom prefix</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Legend Rank', 1499)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -146,7 +154,7 @@
                     <li>Starter food items</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Starter Bundle', 99)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -164,7 +172,7 @@
                     <li>Trading permits</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Economy Bundle', 199)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -182,7 +190,7 @@
                     <li>Building tools</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Builder Bundle', 349)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -201,7 +209,7 @@
                     <li>Pet cosmetics</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Pet Collection', 249)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -219,7 +227,7 @@
                     <li>Toggle anytime</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Particle Effects', 179)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -237,7 +245,7 @@
                     <li>Exclusive designs</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Armor Skins', 399)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -256,7 +264,7 @@
                     <li>Daily rewards</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Key Pack', 129)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -274,7 +282,7 @@
                     <li>Priority support</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Monthly Token', 599)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -292,7 +300,7 @@
                     <li>Instant delivery</li>
                 </ul>
                 <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small" onclick="initiatePurchase('Custom Rename', 49)">Buy Now</button>
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
                     <button class="btn btn-secondary btn-small">Preview</button>
                 </div>
             </div>
@@ -307,48 +315,13 @@
             <a href="store.html">Store</a>
             <a href="redeem.html">Redeem</a>
             <a href="rules.html">Rules</a>
-            <a href="https://discord.gg/" target="_blank">Discord</a>
+            <a href="https://www.youtube.com/@SKYREALM-MCPE" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://www.instagram.com/sky__realms" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://discord.gg/tXW3Aj9wQh" target="_blank" rel="noopener noreferrer">Discord</a>
         </div>
     </footer>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/store.js"></script>
-    
-    <!-- PAYMENT INTEGRATION PLACEHOLDER -->
-    <script>
-        /**
-         * PAYMENT INTEGRATION PLACEHOLDER
-         * This function is called when a user clicks "Buy Now"
-         * 
-         * When implementing payment gateway:
-         * - Add Stripe/Razorpay/PayPal SDK
-         * - Create payment intent on server
-         * - Handle webhook for order confirmation
-         * - Update user inventory in database
-         * 
-         * @param {string} itemName - Name of the item being purchased
-         * @param {number} price - Price in INR
-         */
-        function initiatePurchase(itemName, price) {
-            // Currently disabled - no real payment processing
-            alert('Purchase functionality coming soon!\n\nItem: ' + itemName + '\nPrice: ₹' + price);
-            
-            /* Future implementation:
-            const paymentData = {
-                item: itemName,
-                price: price,
-                userId: getCurrentUserId()
-            };
-            
-            // Initialize payment gateway
-            Stripe.redirectToCheckout({
-                lineItems: [{price_data: {...}, quantity: 1}],
-                mode: 'payment',
-                successUrl: window.location.origin + '/success.html',
-                cancelUrl: window.location.origin + '/store.html'
-            });
-            */
-        }
-    </script>
 </body>
 </html>

@@ -14,8 +14,9 @@ const navLinks = document.getElementById('navLinks');
 // ========================================
 if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
+        const isOpen = hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', String(isOpen));
     });
 
     // Close menu when clicking a link
@@ -23,6 +24,7 @@ if (hamburger && navLinks) {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navLinks.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
         });
     });
 
@@ -31,6 +33,7 @@ if (hamburger && navLinks) {
         if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
             hamburger.classList.remove('active');
             navLinks.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
         }
     });
 }
@@ -42,8 +45,7 @@ function copyServerIP() {
     const serverIP = 'play.skyrealm.fun';
     const copyBtn = document.getElementById('copyIP');
     
-    // Copy to clipboard
-    navigator.clipboard.writeText(serverIP).then(() => {
+    const onCopied = () => {
         // Visual feedback
         if (copyBtn) {
             copyBtn.classList.add('copied');
@@ -55,26 +57,26 @@ function copyServerIP() {
                 copyBtn.querySelector('span:first-child').textContent = 'Copy IP';
             }, 2000);
         }
-    }).catch(err => {
-        console.error('Failed to copy:', err);
-        // Fallback for older browsers
+    };
+
+    const fallbackCopy = () => {
         const textArea = document.createElement('textarea');
         textArea.value = serverIP;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        
-        if (copyBtn) {
-            copyBtn.classList.add('copied');
-            copyBtn.querySelector('span:first-child').textContent = 'Copied!';
-            
-            setTimeout(() => {
-                copyBtn.classList.remove('copied');
-                copyBtn.querySelector('span:first-child').textContent = 'Copy IP';
-            }, 2000);
-        }
-    });
+
+        onCopied();
+    };
+
+    // Copy to clipboard
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(serverIP).then(onCopied).catch(fallbackCopy);
+        return;
+    }
+
+    fallbackCopy();
 }
 
 // ========================================
@@ -104,9 +106,11 @@ function initScrollAnimations() {
 // ========================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const selector = this.getAttribute('href');
+        if (!selector || selector === '#') return;
+        const target = document.querySelector(selector);
         if (target) {
+            e.preventDefault();
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -138,6 +142,10 @@ function initNavbarScroll() {
 // Initialize All Functions
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
+    const copyBtn = document.getElementById('copyIP');
+    if (copyBtn) {
+        copyBtn.addEventListener('click', copyServerIP);
+    }
     initScrollAnimations();
     initNavbarScroll();
 });

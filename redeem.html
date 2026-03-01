@@ -5,18 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redeem Codes | Sky Realms SMP – Season 2</title>
     <meta name="description" content="Purchase and redeem exclusive codes for ranks, coins, and rewards on Sky Realms SMP.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <meta name="theme-color" content="#7B2FF7">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">Sky Realms SMP</a>
-        <div class="hamburger" id="hamburger">
+        <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-controls="navLinks" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
             <li><a href="store.html">Store</a></li>
@@ -42,7 +46,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">BRA***001</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('BRA***001', 'Starter Pack', 49)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -55,7 +59,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">BRA***002</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('BRA***002', 'Coins Small', 29)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -69,7 +73,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">SLV***VIP</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('SLV***VIP', 'VIP Rank', 149)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -82,7 +86,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">SLV***015</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('SLV***015', 'Coins Medium', 99)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -96,7 +100,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">GLD***VP1</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('GLD***VP1', 'VIP+ Rank', 299)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -109,7 +113,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">GLD***BLD</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('GLD***BLD', 'Builder Bundle', 249)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -123,7 +127,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">DMN***MVP</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('DMN***MVP', 'MVP Rank', 499)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -136,7 +140,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">DMN***100</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('DMN***100', 'Coins Large', 399)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -150,7 +154,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">MTH***VP2</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('MTH***VP2', 'MVP+ Rank', 799)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -163,7 +167,7 @@
             <div class="code-display">
                 <span class="code-text code-masked">MTH***LEG</span>
             </div>
-            <button class="btn btn-yellow buy-code-btn" onclick="buyCode('MTH***LEG', 'Legend Rank', 1499)">
+            <button class="btn btn-yellow buy-code-btn buy-code-trigger" type="button">
                 Buy Now
             </button>
         </div>
@@ -184,7 +188,7 @@
                         placeholder="Enter Your Redeem Code"
                         autocomplete="off"
                     >
-                    <button class="btn btn-primary mt-3" style="width: 100%;" onclick="redeemCode()">
+                    <button class="btn btn-primary mt-3" id="redeemSubmit" style="width: 100%;" type="button">
                         Redeem Now
                     </button>
                 </div>
@@ -219,50 +223,13 @@
             <a href="store.html">Store</a>
             <a href="redeem.html">Redeem</a>
             <a href="rules.html">Rules</a>
-            <a href="https://discord.gg/" target="_blank">Discord</a>
+            <a href="https://www.youtube.com/@SKYREALM-MCPE" target="_blank" rel="noopener noreferrer">YouTube</a>
+            <a href="https://www.instagram.com/sky__realms" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://discord.gg/tXW3Aj9wQh" target="_blank" rel="noopener noreferrer">Discord</a>
         </div>
     </footer>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/redeem.js"></script>
-    
-    <!-- PAYMENT INTEGRATION PLACEHOLDER -->
-    <script>
-        /**
-         * PAYMENT INTEGRATION PLACEHOLDER
-         * This function is called when a user clicks "Buy Now"
-         * 
-         * When implementing payment gateway:
-         * - Add Stripe/Razorpay/PayPal SDK
-         * - Create payment intent on server
-         * - Handle webhook for order confirmation
-         * - Generate and email code to user
-         * 
-         * @param {string} code - Masked code
-         * @param {string} itemName - Name of the item
-         * @param {number} price - Price in INR
-         */
-        function buyCode(code, itemName, price) {
-            // Currently disabled - no real payment processing
-            alert('Payment system coming soon!\n\nCode: ' + code + '\nItem: ' + itemName + '\nPrice: ₹' + price);
-            
-            /* Future implementation:
-            const paymentData = {
-                code: code,
-                item: itemName,
-                price: price,
-                userId: getCurrentUserId()
-            };
-            
-            // Initialize payment gateway
-            Stripe.redirectToCheckout({
-                lineItems: [{price_data: {...}, quantity: 1}],
-                mode: 'payment',
-                successUrl: window.location.origin + '/success.html?code=' + code,
-                cancelUrl: window.location.origin + '/redeem.html'
-            });
-            */
-        }
-    </script>
 </body>
 </html>

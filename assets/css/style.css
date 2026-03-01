@@ -3,9 +3,6 @@
    Purple Neon Gaming Aesthetic
    ======================================== */
 
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
-
 /* ========================================
    CSS Variables - Design System
    ======================================== */
@@ -149,6 +146,8 @@ img {
   gap: 5px;
   cursor: pointer;
   padding: 5px;
+  border: none;
+  background: transparent;
 }
 
 .hamburger span {
@@ -610,6 +609,33 @@ img {
 
 .store-subtitle {
   color: var(--text-muted);
+}
+
+.store-search {
+  max-width: 560px;
+  margin: 1.25rem auto 0;
+  padding: 0 1rem;
+}
+
+.store-search-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 2px solid rgba(123, 47, 247, 0.3);
+  background: rgba(26, 26, 46, 0.9);
+  color: var(--text-main);
+  font-family: 'Poppins', sans-serif;
+  transition: var(--transition);
+}
+
+.store-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.store-search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--glow-primary);
 }
 
 /* Category Filters */
@@ -1079,6 +1105,7 @@ img {
   justify-content: center;
   gap: 2rem;
   margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .footer-links a {
@@ -1247,6 +1274,18 @@ img {
 
 .text-center {
   text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .mt-1 { margin-top: 0.5rem; }
