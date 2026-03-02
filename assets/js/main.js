@@ -139,6 +139,59 @@ function initNavbarScroll() {
 }
 
 // ========================================
+// Launch Countdown (Home Page)
+// ========================================
+function initLaunchCountdown() {
+    const countdownCard = document.getElementById('launchCountdownCard');
+    if (!countdownCard) return;
+
+    const daysEl = document.getElementById('countDays');
+    const hoursEl = document.getElementById('countHours');
+    const minutesEl = document.getElementById('countMinutes');
+    const secondsEl = document.getElementById('countSeconds');
+    const grid = document.getElementById('launchCountdownGrid');
+    const liveText = document.getElementById('launchLiveText');
+    const launchDate = new Date('2026-04-01T00:00:00');
+
+    const pad = (value) => String(value).padStart(2, '0');
+
+    const update = () => {
+        const now = new Date();
+        const diff = launchDate.getTime() - now.getTime();
+
+        if (diff <= 0) {
+            if (grid) {
+                grid.hidden = true;
+            }
+            if (liveText) {
+                liveText.hidden = false;
+            }
+            return true;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        if (daysEl) daysEl.textContent = pad(days);
+        if (hoursEl) hoursEl.textContent = pad(hours);
+        if (minutesEl) minutesEl.textContent = pad(minutes);
+        if (secondsEl) secondsEl.textContent = pad(seconds);
+        return false;
+    };
+
+    if (update()) return;
+
+    const timer = setInterval(() => {
+        if (update()) {
+            clearInterval(timer);
+        }
+    }, 1000);
+}
+
+// ========================================
 // Initialize All Functions
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -148,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initScrollAnimations();
     initNavbarScroll();
+    initLaunchCountdown();
 });
 
 // ========================================
@@ -199,5 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
 window.SkyRealms = {
     copyServerIP,
     initScrollAnimations,
-    initNavbarScroll
+    initNavbarScroll,
+    initLaunchCountdown
 };
