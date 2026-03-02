@@ -1030,6 +1030,175 @@ img {
   color: var(--text-muted);
 }
 
+.whitelist-header {
+  padding-top: 8rem;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+
+.whitelist-title {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.whitelist-subtitle {
+  color: var(--text-muted);
+}
+
+.whitelist-section {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 2rem;
+}
+
+.whitelist-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(123, 47, 247, 0.24);
+  border-radius: var(--border-radius);
+  box-shadow: var(--glow-primary);
+  padding: 2rem;
+}
+
+.whitelist-card-title {
+  font-size: 1.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.whitelist-card-note {
+  color: var(--text-muted);
+  margin-bottom: 1.4rem;
+}
+
+.whitelist-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.whitelist-field label {
+  display: block;
+  color: var(--text-main);
+  margin-bottom: 0.45rem;
+  font-size: 0.92rem;
+}
+
+.whitelist-field input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 2px solid rgba(123, 47, 247, 0.28);
+  background: rgba(15, 15, 26, 0.7);
+  color: var(--text-main);
+  font-family: 'Poppins', sans-serif;
+  transition: var(--transition);
+}
+
+.whitelist-field input::placeholder {
+  color: var(--text-muted);
+}
+
+.whitelist-field input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--glow-primary);
+}
+
+.whitelist-full {
+  grid-column: 1 / -1;
+}
+
+.whitelist-rules-box {
+  border: 1px solid rgba(123, 47, 247, 0.3);
+  background: rgba(123, 47, 247, 0.08);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.whitelist-rules-box h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.whitelist-rules-box ul {
+  list-style: disc;
+  margin-left: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.whitelist-rules-box li,
+.whitelist-rules-box p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.whitelist-rules-box a {
+  color: var(--accent-yellow);
+}
+
+.whitelist-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.whitelist-checkbox input {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.1rem;
+  accent-color: var(--primary);
+}
+
+.whitelist-message {
+  grid-column: 1 / -1;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  display: none;
+  font-size: 0.92rem;
+}
+
+.whitelist-message.success {
+  display: block;
+  background: rgba(34, 197, 94, 0.16);
+  border: 1px solid rgba(34, 197, 94, 0.6);
+  color: #BBF7D0;
+}
+
+.whitelist-message.error {
+  display: block;
+  background: rgba(239, 68, 68, 0.16);
+  border: 1px solid rgba(239, 68, 68, 0.6);
+  color: #FECACA;
+}
+
+.whitelist-apply-wrap {
+  position: relative;
+}
+
+.whitelist-apply-wrap .btn[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.whitelist-apply-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  background: rgba(15, 15, 26, 0.42);
+  color: #F5D0FE;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  pointer-events: none;
+}
+
 .rules-container {
   max-width: 800px;
   margin: 0 auto;
@@ -1219,6 +1388,7 @@ img {
   }
   
   .store-title,
+  .whitelist-title,
   .redeem-title,
   .rules-title {
     font-size: 2rem;
@@ -1232,6 +1402,10 @@ img {
   .rule-card {
     flex-direction: column;
     text-align: center;
+  }
+
+  .whitelist-form {
+    grid-template-columns: 1fr;
   }
 
   .code-display {
