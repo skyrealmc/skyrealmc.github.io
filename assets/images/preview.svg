@@ -2,34 +2,42 @@
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#2B0F4E"/>
-      <stop offset="45%" stop-color="#5B21B6"/>
+      <stop offset="50%" stop-color="#5B21B6"/>
       <stop offset="100%" stop-color="#7B2FF7"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="40%" r="55%">
-      <stop offset="0%" stop-color="#A855F7" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+    <radialGradient id="ambient" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#C084FC" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#C084FC" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FACC15"/>
-      <stop offset="100%" stop-color="#EAB308"/>
+    <linearGradient id="cloud" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F3E8FF"/>
+      <stop offset="100%" stop-color="#C4B5FD"/>
     </linearGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#ambient)"/>
 
-  <g transform="translate(600 220)">
-    <rect x="-78" y="-78" width="156" height="156" rx="32" fill="rgba(15,15,26,0.22)" stroke="rgba(255,255,255,0.18)"/>
-    <path d="M-42 22L0-32l42 54-42 24-42-24z" fill="rgba(15,15,26,0.45)"/>
-    <path d="M0-28l28 36-28 16-28-16 28-36z" fill="url(#accent)"/>
-    <circle cx="0" cy="2" r="11" fill="#0F0F1A"/>
+  <g opacity="0.9">
+    <circle cx="180" cy="100" r="3.5" fill="#F5D0FE"/>
+    <circle cx="260" cy="145" r="2.8" fill="#DDD6FE"/>
+    <circle cx="920" cy="92" r="3.2" fill="#F5D0FE"/>
+    <circle cx="1030" cy="148" r="2.6" fill="#DDD6FE"/>
+    <circle cx="1075" cy="92" r="2.1" fill="#C4B5FD"/>
   </g>
 
-  <text x="600" y="380" text-anchor="middle" fill="#FFFFFF" font-family="Orbitron, Poppins, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="0.5">
+  <g transform="translate(600 220)">
+    <circle cx="120" cy="-65" r="30" fill="#F5D0FE" opacity="0.9"/>
+    <circle cx="132" cy="-77" r="30" fill="#5B21B6"/>
+
+    <path d="M-185 58c-52 0-94-38-94-86 0-44 35-81 80-85 16-57 68-97 131-97 57 0 108 34 128 84 8-2 16-3 24-3 55 0 99 42 99 95 0 51-43 92-97 92H-185z" fill="url(#cloud)"/>
+    <path d="M-185 58h371c54 0 97-41 97-92 0-6-1-11-2-17-10 41-48 72-95 72H-185c-43 0-79-24-93-60 6 54 49 97 93 97z" fill="#A78BFA" opacity="0.5"/>
+  </g>
+
+  <text x="600" y="392" text-anchor="middle" fill="#FFFFFF" font-family="Orbitron, Poppins, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="0.4">
     Sky Realms SMP – Season 2
   </text>
-
-  <text x="600" y="455" text-anchor="middle" fill="#FACC15" font-family="Poppins, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="1.2">
+  <text x="600" y="468" text-anchor="middle" fill="#F5D0FE" font-family="Poppins, Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="1.1">
     Join Now
   </text>
 </svg>
