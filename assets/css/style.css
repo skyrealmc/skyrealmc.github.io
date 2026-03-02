@@ -419,13 +419,8 @@ img {
   box-shadow: var(--glow-success);
 }
 
-.launch-countdown-card {
-  margin: 0.9rem auto 0;
-  max-width: 760px;
-  background: rgba(26, 26, 46, 0.88);
-  border: 1px solid rgba(123, 47, 247, 0.4);
-  border-radius: var(--border-radius);
-  padding: 0.85rem 0.95rem;
+.launch-countdown-section {
+  text-align: center;
 }
 
 .launch-countdown-label {
@@ -435,17 +430,16 @@ img {
 }
 
 .launch-countdown-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 1rem;
 }
 
 .launch-countdown-item {
-  background: rgba(15, 15, 26, 0.75);
-  border: 1px solid rgba(123, 47, 247, 0.28);
-  border-radius: 12px;
-  padding: 0.5rem 0.35rem;
-  min-width: 72px;
+  min-width: 80px;
 }
 
 .launch-countdown-value {
@@ -467,6 +461,7 @@ img {
   color: #BBF7D0;
   font-weight: 600;
   font-size: 0.82rem;
+  margin-top: 0.4rem;
 }
 
 /* ========================================
@@ -1430,7 +1425,7 @@ img {
   }
 
   .launch-countdown-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
   
   .section-title {
