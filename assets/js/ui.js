@@ -304,7 +304,11 @@ function initNavbar() {
     });
     
     // Active page indicator
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const path = window.location.pathname;
+    const currentPage =
+        path === '/' ? '/' :
+        path.endsWith('/') ? path :
+        path.substring(path.lastIndexOf('/') + 1);
     navLinks.querySelectorAll('a').forEach(link => {
         const href = link.getAttribute('href');
         if (href === currentPage) {
@@ -331,10 +335,10 @@ function initFooter() {
         <div class="footer-content">
             <div class="footer-logo">Sky Realms SMP</div>
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="store.html">Store</a>
-                <a href="redeem.html">Redeem</a>
-                <a href="rules.html">Rules</a>
+                <a href="/">Home</a>
+                <a href="/store/">Store</a>
+                <a href="/redeem/">Redeem</a>
+                <a href="/rules/">Rules</a>
             </div>
             <div class="footer-social">
                 <a href="https://discord.gg/" target="_blank" class="social-link" title="Discord">
