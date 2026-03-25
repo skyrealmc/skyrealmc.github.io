@@ -4,7 +4,6 @@
  */
 
 const WHITELIST_STORAGE_KEY = 'skyrealms-whitelist-applications-v1';
-const WHITELIST_APPLICATIONS_OPEN = false;
 
 function isValidMinecraftUsername(username) {
     return /^[A-Za-z0-9_]{3,16}$/.test(username);
@@ -33,20 +32,26 @@ function initWhitelistForm() {
     const form = document.getElementById('whitelistForm');
     const message = document.getElementById('whitelistMessage');
     const applyButton = document.getElementById('whitelistApplyBtn');
+    const applyOverlay = document.getElementById('whitelistApplyOverlay');
+    const applicationsOpen = form?.dataset.applicationsOpen === 'true';
 
     if (!form || !message) return;
 
     if (applyButton) {
-        applyButton.disabled = !WHITELIST_APPLICATIONS_OPEN;
+        applyButton.disabled = !applicationsOpen;
+    }
+
+    if (applyOverlay) {
+        applyOverlay.hidden = applicationsOpen;
     }
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        if (!WHITELIST_APPLICATIONS_OPEN) {
+        if (!applicationsOpen) {
             showWhitelistMessage(
                 message,
-                'Whitelist applications are currently closed. Please check back later.',
+                'Whitelist applications are currently closed. Join Discord chat for launch updates and the next application window.',
                 'error'
             );
             return;
@@ -104,18 +109,11 @@ function initWhitelistForm() {
 
         showWhitelistMessage(
             message,
-            `Application submitted for ${minecraftUsername}. If accepted, we will announce it through email at ${email}.`,
+            `Application saved for ${minecraftUsername}. Staff review will be announced during the open whitelist window, and follow-up will use ${email}.`,
             'success'
         );
 
         form.reset();
-
-        /**
-         * Backend integration needed for production:
-         * 1) POST to /api/whitelist/apply with application payload.
-         * 2) Staff panel updates status to accepted/rejected.
-         * 3) On accepted, backend sends transactional email notification.
-         */
     });
 }
 

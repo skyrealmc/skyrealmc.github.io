@@ -64,6 +64,10 @@
         <div class="hero-content">
             <h1 class="hero-title">Sky Realms SMP – Season 2</h1>
             <p class="hero-subtitle">The Ultimate Bedrock Survival Experience</p>
+            <div class="hero-status-strip">
+                <span class="hero-status-dot" aria-hidden="true"></span>
+                <span class="hero-status-text">Pre-launch phase. Countdown is shown in UTC for every player.</span>
+            </div>
             
             <div class="hero-buttons">
                 <a href="minecraft://?addExternalServer=Sky%20Realms|play.skyrealm.fun" class="btn btn-primary">Join Server</a>
@@ -73,6 +77,10 @@
             </div>
 
             <div class="server-info">
+                <div class="server-info-item">
+                    <span class="server-info-label">Status:</span>
+                    <span class="server-info-value">Launching Soon</span>
+                </div>
                 <div class="server-info-item">
                     <span class="server-info-label">IP Address:</span>
                     <span class="server-info-value" id="serverIP">play.skyrealm.fun</span>
@@ -86,6 +94,7 @@
                     <span>📋</span>
                 </button>
             </div>
+            <p class="chat-widget-note">Need help before launch? Use the <strong>Discord chat bubble</strong> in the bottom-right.</p>
 
         </div>
     </section>
@@ -160,7 +169,7 @@
     </section>
 
     <section class="section launch-countdown-section fade-in" style="padding-top: 0;" id="launchCountdownCard">
-            <p class="launch-countdown-label">Server Launch: April 1, 2026</p>
+            <p class="launch-countdown-label" id="launchCountdownLabel">Server Launch: April 1, 2026 at 00:00 UTC</p>
             <div class="launch-countdown-grid" id="launchCountdownGrid">
                 <div class="launch-countdown-item">
                     <span class="launch-countdown-value" id="countDays">00</span>
@@ -186,6 +195,7 @@
     <footer class="footer">
         <div class="footer-logo">Sky Realms SMP</div>
         <p class="footer-text">© 2026 Sky Realms SMP. All rights reserved.</p>
+        <p class="footer-chat-hint">Live support is available through the <strong>Discord chat widget</strong> in the bottom-right corner.</p>
         <div class="footer-links">
             <a href="/store/">Store</a>
             <a href="/redeem/">Redeem</a>

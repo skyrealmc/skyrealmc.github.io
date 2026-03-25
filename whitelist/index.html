@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whitelist Application | Sky Realms SMP – Season 2</title>
     <meta name="description" content="Apply for the Sky Realms SMP whitelist. Submit your Minecraft username, Discord username, email, age, and rule agreement.">
+    <meta property="og:title" content="Whitelist Application | Sky Realms SMP – Season 2">
+    <meta property="og:description" content="Check whitelist availability and apply for Sky Realms SMP during the active application window.">
+    <meta property="og:image" content="https://skyrealm.fun/assets/images/preview.svg">
+    <meta property="og:url" content="https://skyrealm.fun/whitelist/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Whitelist Application | Sky Realms SMP – Season 2">
+    <meta name="twitter:description" content="Check whitelist availability and apply for Sky Realms SMP during the active application window.">
+    <meta name="twitter:image" content="https://skyrealm.fun/assets/images/preview.svg">
+    <link rel="canonical" href="https://skyrealm.fun/whitelist/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap">
@@ -31,7 +41,8 @@
 
     <header class="whitelist-header">
         <h1 class="whitelist-title">Whitelist Application</h1>
-        <p class="whitelist-subtitle">Apply to join Sky Realms SMP. Accepted players are notified through email.</p>
+        <p class="whitelist-subtitle">Apply to join Sky Realms SMP when the whitelist window is active. Staff updates are shared in Discord.</p>
+        <p class="chat-widget-note">Check the <strong>Discord chat bubble</strong> for launch updates and whitelist announcements.</p>
     </header>
 
     <section class="whitelist-section">
@@ -39,7 +50,7 @@
             <h2 class="whitelist-card-title">Apply for Access</h2>
             <p class="whitelist-card-note">Please enter accurate details. Your application stays in <strong>pending</strong> until staff review it.</p>
 
-            <form id="whitelistForm" class="whitelist-form" novalidate>
+            <form id="whitelistForm" class="whitelist-form" novalidate data-applications-open="false">
                 <div class="whitelist-field">
                     <label for="minecraftUsername">Minecraft Username (clear username)</label>
                     <input id="minecraftUsername" name="minecraftUsername" type="text" minlength="3" maxlength="16" placeholder="e.g. Steve_01" required>
@@ -82,7 +93,7 @@
                 <div class="whitelist-field whitelist-full">
                     <div class="whitelist-apply-wrap">
                         <button id="whitelistApplyBtn" type="submit" class="btn btn-primary" disabled>Apply Whitelist</button>
-                        <span class="whitelist-apply-overlay">Applications are currently closed</span>
+                        <span class="whitelist-apply-overlay" id="whitelistApplyOverlay">Applications are currently closed</span>
                     </div>
                 </div>
 
@@ -94,6 +105,7 @@
     <footer class="footer">
         <div class="footer-logo">Sky Realms SMP</div>
         <p class="footer-text">© 2026 Sky Realms SMP. All rights reserved.</p>
+        <p class="footer-chat-hint">Whitelist announcements appear in the <strong>Discord chat widget</strong> and server community channels.</p>
         <div class="footer-links">
             <a href="/store/">Store</a>
             <a href="/redeem/">Redeem</a>

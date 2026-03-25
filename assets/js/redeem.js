@@ -141,14 +141,28 @@ function initBuyCodeButtons() {
  * Replace with backend-driven payment flow.
  */
 function buyCode(code, itemName, price) {
-    alert(
-        'Payment system coming soon!\n\nCode: ' +
-            code +
-            '\nItem: ' +
-            itemName +
-            '\nPrice: \u20b9' +
-            price
-    );
+    window.SkyRealms.openSiteDialog({
+        title: 'Buy Code on Discord',
+        body: `
+            <div class="site-dialog-hero">🎟️</div>
+            <p class="site-dialog-price">₹${price}</p>
+            <p class="site-dialog-copy"><strong>${itemName}</strong></p>
+            <p class="site-dialog-note">Code sales are currently handled manually on Discord. Mention the showcase code <strong>${code}</strong> to staff when ordering.</p>
+        `,
+        actions: [
+            {
+                label: 'Open Discord',
+                variant: 'btn-primary',
+                href: window.SkyRealms.DISCORD_INVITE_URL,
+                target: '_blank'
+            },
+            {
+                label: 'Close',
+                variant: 'btn-secondary',
+                onClick: window.SkyRealms.closeSiteDialog
+            }
+        ]
+    });
 }
 
 function showSuccess(reward) {

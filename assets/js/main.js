@@ -4,6 +4,14 @@
  */
 
 // ========================================
+// Site Constants
+// ========================================
+const SERVER_IP = 'play.skyrealm.fun';
+const DISCORD_INVITE_URL = 'https://discord.gg/tXW3Aj9wQh';
+const LAUNCH_DATE_UTC = '2026-04-01T00:00:00Z';
+let activeDialogEscapeHandler = null;
+
+// ========================================
 // DOM Elements
 // ========================================
 const hamburger = document.getElementById('hamburger');
@@ -42,7 +50,6 @@ if (hamburger && navLinks) {
 // Copy Server IP Functionality
 // ========================================
 function copyServerIP() {
-    const serverIP = 'play.skyrealm.fun';
     const copyBtn = document.getElementById('copyIP');
     
     const onCopied = () => {
@@ -61,7 +68,7 @@ function copyServerIP() {
 
     const fallbackCopy = () => {
         const textArea = document.createElement('textarea');
-        textArea.value = serverIP;
+        textArea.value = SERVER_IP;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
@@ -72,7 +79,7 @@ function copyServerIP() {
 
     // Copy to clipboard
     if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(serverIP).then(onCopied).catch(fallbackCopy);
+        navigator.clipboard.writeText(SERVER_IP).then(onCopied).catch(fallbackCopy);
         return;
     }
 
@@ -151,7 +158,12 @@ function initLaunchCountdown() {
     const secondsEl = document.getElementById('countSeconds');
     const grid = document.getElementById('launchCountdownGrid');
     const liveText = document.getElementById('launchLiveText');
-    const launchDate = new Date('2026-04-01T00:00:00');
+    const label = document.getElementById('launchCountdownLabel');
+    const launchDate = new Date(LAUNCH_DATE_UTC);
+
+    if (label) {
+        label.textContent = 'Server Launch: April 1, 2026 at 00:00 UTC';
+    }
 
     const pad = (value) => String(value).padStart(2, '0');
 
@@ -189,6 +201,123 @@ function initLaunchCountdown() {
             clearInterval(timer);
         }
     }, 1000);
+}
+
+// ========================================
+// Shared Notice System
+// ========================================
+function getNoticeContainer() {
+    let container = document.getElementById('siteNoticeContainer');
+    if (container) return container;
+
+    container = document.createElement('div');
+    container.id = 'siteNoticeContainer';
+    container.className = 'site-notice-container';
+    document.body.appendChild(container);
+    return container;
+}
+
+function showSiteNotice(message, type = 'info') {
+    const container = getNoticeContainer();
+    const notice = document.createElement('div');
+    notice.className = `site-notice site-notice-${type}`;
+    notice.textContent = message;
+    container.appendChild(notice);
+
+    window.setTimeout(() => {
+        notice.classList.add('is-hiding');
+        window.setTimeout(() => notice.remove(), 250);
+    }, 3200);
+}
+
+// ========================================
+// Shared Dialog System
+// ========================================
+function closeSiteDialog() {
+    document.getElementById('siteDialogOverlay')?.remove();
+    document.body.classList.remove('dialog-open');
+    if (activeDialogEscapeHandler) {
+        document.removeEventListener('keydown', activeDialogEscapeHandler);
+        activeDialogEscapeHandler = null;
+    }
+}
+
+function openSiteDialog({ title = '', body = '', actions = [] }) {
+    closeSiteDialog();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'siteDialogOverlay';
+    overlay.className = 'site-dialog-overlay';
+
+    const dialog = document.createElement('div');
+    dialog.className = 'site-dialog';
+
+    const header = document.createElement('div');
+    header.className = 'site-dialog-header';
+
+    const titleEl = document.createElement('h3');
+    titleEl.className = 'site-dialog-title';
+    titleEl.textContent = title;
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'site-dialog-close';
+    closeBtn.setAttribute('aria-label', 'Close dialog');
+    closeBtn.textContent = '×';
+    closeBtn.addEventListener('click', closeSiteDialog);
+
+    header.appendChild(titleEl);
+    header.appendChild(closeBtn);
+
+    const bodyEl = document.createElement('div');
+    bodyEl.className = 'site-dialog-body';
+    bodyEl.innerHTML = body;
+
+    const actionsEl = document.createElement('div');
+    actionsEl.className = 'site-dialog-actions';
+
+    actions.forEach((action) => {
+        const button = action.href ? document.createElement('a') : document.createElement('button');
+        if (action.href) {
+            button.href = action.href;
+            button.target = action.target || '_self';
+            if (action.target === '_blank') {
+                button.rel = 'noopener noreferrer';
+            }
+        } else {
+            button.type = 'button';
+            button.addEventListener('click', () => {
+                action.onClick?.();
+            });
+        }
+
+        button.className = `btn ${action.variant || 'btn-secondary'}`;
+        button.textContent = action.label;
+        actionsEl.appendChild(button);
+    });
+
+    dialog.appendChild(header);
+    dialog.appendChild(bodyEl);
+    if (actions.length) {
+        dialog.appendChild(actionsEl);
+    }
+
+    overlay.appendChild(dialog);
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            closeSiteDialog();
+        }
+    });
+
+    activeDialogEscapeHandler = function onEscape(event) {
+        if (event.key === 'Escape') {
+            closeSiteDialog();
+        }
+    };
+    document.addEventListener('keydown', activeDialogEscapeHandler);
+
+    document.body.appendChild(overlay);
+    document.body.classList.add('dialog-open');
 }
 
 // ========================================
@@ -251,8 +380,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Export functions for use in other scripts
 window.SkyRealms = {
+    SERVER_IP,
+    DISCORD_INVITE_URL,
     copyServerIP,
     initScrollAnimations,
     initNavbarScroll,
-    initLaunchCountdown
+    initLaunchCountdown,
+    showSiteNotice,
+    openSiteDialog,
+    closeSiteDialog
 };
