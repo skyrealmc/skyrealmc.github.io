@@ -38,10 +38,18 @@
         document.head.appendChild(script);
     }
 
+    function scheduleWidgetLoad() {
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadWidgetScript, { timeout: 3000 });
+            return;
+        }
+        window.setTimeout(loadWidgetScript, 1200);
+    }
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadWidgetScript, { once: true });
+        document.addEventListener('DOMContentLoaded', scheduleWidgetLoad, { once: true });
         return;
     }
 
-    loadWidgetScript();
+    scheduleWidgetLoad();
 })();

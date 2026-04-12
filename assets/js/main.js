@@ -133,15 +133,17 @@ function initNavbarScroll() {
     const navbar = document.querySelector('.navbar');
     
     if (navbar) {
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(15, 15, 26, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(139, 92, 246, 0.2)';
-            } else {
-                navbar.style.background = 'rgba(15, 15, 26, 0.9)';
-                navbar.style.boxShadow = 'none';
-            }
-        });
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                const isScrolled = window.scrollY > 50;
+                navbar.style.background = isScrolled ? 'rgba(15, 15, 26, 0.95)' : 'rgba(15, 15, 26, 0.9)';
+                navbar.style.boxShadow = isScrolled ? '0 2px 20px rgba(139, 92, 246, 0.2)' : 'none';
+                ticking = false;
+            });
+        }, { passive: true });
     }
 }
 

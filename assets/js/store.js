@@ -62,7 +62,7 @@ function renderStoreItems() {
 
         if (matchesCategory && matchesSearch) {
             item.style.display = 'block';
-            item.style.animation = 'fadeIn 0.35s ease';
+            item.style.animation = 'none';
             visibleCount += 1;
         } else {
             item.style.display = 'none';

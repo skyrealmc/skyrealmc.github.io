@@ -31,11 +31,11 @@
   --glow-yellow: 0 0 20px rgba(250, 204, 21, 0.5);
   --glow-success: 0 0 20px rgba(34, 197, 94, 0.5);
   --glow-danger: 0 0 20px rgba(239, 68, 68, 0.5);
-  --font-heading: 'Press Start 2P', 'Orbitron', sans-serif;
+  --font-heading: 'Orbitron', sans-serif;
   
   /* Spacing */
   --border-radius: 16px;
-  --transition: all 0.3s ease;
+  --transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* ========================================
@@ -94,7 +94,6 @@ img {
   z-index: 1000;
   padding: 1rem 2rem;
   background: rgba(15, 15, 26, 0.95);
-  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(123, 47, 247, 0.2);
   display: flex;
   justify-content: space-between;
@@ -265,7 +264,7 @@ img {
     radial-gradient(ellipse at 20% 80%, rgba(123, 47, 247, 0.3) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(123, 47, 247, 0.1) 0%, transparent 70%);
-  animation: gradientShift 10s ease infinite;
+  animation: none;
 }
 
 @keyframes gradientShift {
@@ -296,7 +295,7 @@ img {
   height: 4px;
   background: var(--primary);
   border-radius: 50%;
-  animation: float 15s infinite;
+  animation: none;
   opacity: 0.6;
 }
 
@@ -343,7 +342,7 @@ img {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: glow 2s ease-in-out infinite alternate;
+  animation: none;
 }
 
 @keyframes glow {
@@ -378,7 +377,7 @@ img {
   border-radius: 999px;
   background: rgba(26, 26, 46, 0.72);
   border: 1px solid rgba(123, 47, 247, 0.28);
-  box-shadow: var(--glow-primary);
+  box-shadow: none;
 }
 
 .hero-status-dot {
@@ -386,7 +385,7 @@ img {
   height: 10px;
   border-radius: 50%;
   background: var(--accent-yellow);
-  box-shadow: 0 0 16px rgba(250, 204, 21, 0.8);
+  box-shadow: none;
 }
 
 .hero-status-text {
@@ -397,7 +396,6 @@ img {
 /* Server Info Box */
 .server-info {
   background: rgba(26, 26, 46, 0.8);
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(123, 47, 247, 0.3);
   border-radius: var(--border-radius);
   padding: 1rem 1.25rem;
@@ -1518,7 +1516,17 @@ img {
   justify-content: center;
   padding: 1.5rem;
   background: rgba(5, 8, 18, 0.76);
-  backdrop-filter: blur(10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 .site-dialog {
