@@ -697,6 +697,20 @@ img {
   color: var(--text-muted);
 }
 
+.store-subscription-note {
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.store-rank-ladder {
+  margin: 1rem auto 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 960px;
+  padding: 0 1rem;
+}
+
 .store-search {
   max-width: 560px;
   margin: 1.25rem auto 0;
@@ -808,10 +822,52 @@ img {
   padding: 1.5rem;
 }
 
+.store-item-badge {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.store-item-badge--ultimate {
+  background: linear-gradient(135deg, var(--accent-yellow), #f59e0b);
+  color: #1a1a2e;
+}
+
+.store-item--popular {
+  border-color: rgba(34, 197, 94, 0.45);
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.28), 0 8px 22px rgba(34, 197, 94, 0.18);
+}
+
+.store-item--ultimate {
+  border-color: rgba(255, 215, 0, 0.42);
+  box-shadow: 0 0 0 1px rgba(255, 215, 0, 0.25), 0 8px 22px rgba(255, 215, 0, 0.16);
+}
+
 .store-item-name {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
   color: var(--primary);
+}
+
+.store-item-plan {
+  display: inline-flex;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  background: rgba(123, 47, 247, 0.28);
+  border: 1px solid rgba(123, 47, 247, 0.45);
 }
 
 .store-item-price {

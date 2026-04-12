@@ -3,14 +3,15 @@
  * Category filtering, search, and purchase CTA handling
  */
 
-let activeCategory = 'all';
+let activeCategory = 'ranks';
 let activeSearch = '';
+const RANKS_DATA_URL = '/data/ranks.json';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadRankCatalog();
     initStoreFilters();
     initStoreSearch();
-    initPurchaseButtons();
-    initPreviewButtons();
+    initStoreActions();
     renderStoreItems();
 });
 
@@ -18,11 +19,16 @@ function initStoreFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     if (!filterButtons.length) return;
 
+    const activeButton = document.querySelector('.filter-btn.active');
+    if (activeButton) {
+        activeCategory = activeButton.getAttribute('data-category') || 'ranks';
+    }
+
     filterButtons.forEach((button) => {
         button.addEventListener('click', () => {
             filterButtons.forEach((btn) => btn.classList.remove('active'));
             button.classList.add('active');
-            activeCategory = button.getAttribute('data-category') || 'all';
+            activeCategory = button.getAttribute('data-category') || 'ranks';
             renderStoreItems();
         });
     });
@@ -50,7 +56,7 @@ function renderStoreItems() {
             .map((li) => li.textContent.toLowerCase())
             .join(' ');
 
-        const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
+        const matchesCategory = itemCategory === activeCategory;
         const matchesSearch =
             activeSearch === '' || name.includes(activeSearch) || features.includes(activeSearch);
 
@@ -68,23 +74,27 @@ function renderStoreItems() {
     }
 }
 
-function initPurchaseButtons() {
-    document.querySelectorAll('.purchase-btn').forEach((button) => {
-        button.addEventListener('click', () => {
-            const item = getStoreItemDetails(button.closest('.store-item'));
-            if (!item) return;
-            initiatePurchase(item);
-        });
-    });
-}
+function initStoreActions() {
+    const storeGrid = document.querySelector('.store-grid');
+    if (!storeGrid) return;
 
-function initPreviewButtons() {
-    document.querySelectorAll('.store-item-buttons .btn-secondary').forEach((button) => {
-        button.addEventListener('click', () => {
-            const item = getStoreItemDetails(button.closest('.store-item'));
-            if (!item) return;
-            openPreview(item);
-        });
+    storeGrid.addEventListener('click', (event) => {
+        const purchaseButton = event.target.closest('.purchase-btn');
+        if (purchaseButton) {
+            const item = getStoreItemDetails(purchaseButton.closest('.store-item'));
+            if (item) {
+                initiatePurchase(item);
+            }
+            return;
+        }
+
+        const previewButton = event.target.closest('.store-item-buttons .btn-secondary');
+        if (previewButton) {
+            const item = getStoreItemDetails(previewButton.closest('.store-item'));
+            if (item) {
+                openPreview(item);
+            }
+        }
     });
 }
 
@@ -158,9 +168,116 @@ function initiatePurchase(item) {
     });
 }
 
+async function loadRankCatalog() {
+    const rankCards = await fetchRankCards();
+    if (!rankCards) return;
+
+    const storeGrid = document.querySelector('.store-grid');
+    if (!storeGrid) return;
+
+    const existingRankCards = storeGrid.querySelectorAll('.store-item[data-category="ranks"]');
+    existingRankCards.forEach((card) => card.remove());
+
+    const insertBeforeNode = storeGrid.querySelector('.store-item');
+    if (insertBeforeNode) {
+        storeGrid.insertBefore(rankCards, insertBeforeNode);
+    } else {
+        storeGrid.appendChild(rankCards);
+    }
+}
+
+async function fetchRankCards() {
+    try {
+        const response = await fetch(RANKS_DATA_URL, { cache: 'no-store' });
+        if (!response.ok) {
+            console.warn(`Unable to load ${RANKS_DATA_URL}: ${response.status}`);
+            return null;
+        }
+
+        const payload = await response.json();
+        if (!payload || !Array.isArray(payload.ranks) || payload.ranks.length === 0) {
+            console.warn(`Invalid rank catalog format in ${RANKS_DATA_URL}`);
+            return null;
+        }
+
+        const fragment = document.createDocumentFragment();
+        payload.ranks.forEach((rank) => {
+            if (!isValidRank(rank)) return;
+            fragment.appendChild(buildRankCard(rank));
+        });
+        return fragment;
+    } catch (error) {
+        console.warn(`Rank catalog fetch failed (${RANKS_DATA_URL}). Using HTML fallback.`, error);
+        return null;
+    }
+}
+
+function isValidRank(rank) {
+    return (
+        rank &&
+        typeof rank.name === 'string' &&
+        typeof rank.icon === 'string' &&
+        (typeof rank.price === 'number' || typeof rank.price === 'string') &&
+        Array.isArray(rank.perks) &&
+        rank.perks.length > 0
+    );
+}
+
+function buildRankCard(rank) {
+    const card = document.createElement('div');
+    const highlightClass = rank.highlight === 'popular'
+        ? ' store-item--popular'
+        : rank.highlight === 'ultimate'
+            ? ' store-item--ultimate'
+            : '';
+    card.className = `store-item${highlightClass}`;
+    card.setAttribute('data-category', 'ranks');
+
+    const badgeMarkup = rank.badge
+        ? `<span class="store-item-badge${rank.highlight === 'ultimate' ? ' store-item-badge--ultimate' : ''}">${escapeHtml(rank.badge)}</span>`
+        : '';
+
+    card.innerHTML = `
+        <div class="store-item-image">${escapeHtml(rank.icon)}</div>
+        <div class="store-item-content">
+            ${badgeMarkup}
+            <h3 class="store-item-name">${escapeHtml(rank.name)} Rank</h3>
+            <div class="store-item-plan">${escapeHtml(rank.planLabel || 'Monthly Plan')}</div>
+            <div class="store-item-price">₹${formatPrice(rank.price)}/month</div>
+            <ul class="store-item-features">
+                ${rank.perks.map((perk) => `<li>${escapeHtml(perk)}</li>`).join('')}
+            </ul>
+            <div class="store-item-buttons">
+                <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
+                <button class="btn btn-secondary btn-small" type="button">Preview</button>
+            </div>
+        </div>
+    `;
+
+    return card;
+}
+
+function formatPrice(price) {
+    const numericPrice = Number(price);
+    if (!Number.isNaN(numericPrice)) {
+        return numericPrice.toLocaleString('en-IN');
+    }
+    return String(price);
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 window.StoreFunctions = {
     initStoreFilters,
     renderStoreItems,
-    initPreviewButtons,
+    initStoreActions,
+    loadRankCatalog,
     initiatePurchase
 };

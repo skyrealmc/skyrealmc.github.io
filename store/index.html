@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store | Sky Realms SMP – Season 2</title>
-    <meta name="description" content="Support Sky Realms SMP by purchasing ranks, bundles, cosmetics and special items.">
+    <meta name="description" content="Choose your monthly rank plan on Sky Realms SMP with balanced utility perks.">
     <meta property="og:title" content="Store | Sky Realms SMP – Season 2">
-    <meta property="og:description" content="Browse ranks, bundles, cosmetics, and special items for Sky Realms SMP.">
+    <meta property="og:description" content="Choose your monthly rank plan on Sky Realms SMP with balanced utility perks.">
     <meta property="og:image" content="https://skyrealm.fun/assets/images/preview.svg">
     <meta property="og:url" content="https://skyrealm.fun/store/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Store | Sky Realms SMP – Season 2">
-    <meta name="twitter:description" content="Browse ranks, bundles, cosmetics, and special items for Sky Realms SMP.">
+    <meta name="twitter:description" content="Choose your monthly rank plan on Sky Realms SMP with balanced utility perks.">
     <meta name="twitter:image" content="https://skyrealm.fun/assets/images/preview.svg">
     <link rel="canonical" href="https://skyrealm.fun/store/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,54 +43,36 @@
     <!-- Store Header -->
     <header class="store-header">
         <h1 class="store-title">Server Store</h1>
-        <p class="store-subtitle">Support the server and get exclusive perks!</p>
+        <p class="store-subtitle">Choose Your Monthly Plan</p>
+        <p class="store-subscription-note">Subscriptions renew every month. Cancel anytime.</p>
         <div class="store-search">
             <label for="storeSearch" class="sr-only">Search store items</label>
-            <input id="storeSearch" class="store-search-input" type="search" placeholder="Search ranks, bundles, and items...">
+            <input id="storeSearch" class="store-search-input" type="search" placeholder="Search monthly rank plans...">
         </div>
         <p class="chat-widget-note">Orders are currently handled manually. Use the <strong>Discord chat bubble</strong> for checkout help.</p>
+        <p class="store-rank-ladder" aria-label="Rank progression">💎 Diamond → 🛡️ Guardian → 🔮 Mystic → 🌠 Astral → 🌌 Cosmic → 👑 Legacy</p>
     </header>
 
     <!-- Category Filters -->
     <div class="store-filters">
-        <button class="filter-btn active" data-category="all">All</button>
-        <button class="filter-btn" data-category="ranks">Ranks</button>
-        <button class="filter-btn" data-category="bundles">Bundles</button>
-        <button class="filter-btn" data-category="cosmetics">Cosmetics</button>
-        <button class="filter-btn" data-category="special">Special Items</button>
+        <button class="filter-btn active" data-category="ranks">Ranks</button>
     </div>
 
     <!-- Store Grid -->
     <div class="store-grid">
         <!-- Ranks -->
         <div class="store-item" data-category="ranks">
-            <div class="store-item-image">👑</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">VIP Rank</h3>
-                <div class="store-item-price">₹149</div>
-                <ul class="store-item-features">
-                    <li>Access to /fly command</li>
-                    <li>3 /home locations</li>
-                    <li>VIP chat color</li>
-                    <li>Exclusive VIP shops</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="store-item" data-category="ranks">
             <div class="store-item-image">💎</div>
             <div class="store-item-content">
-                <h3 class="store-item-name">VIP+ Rank</h3>
-                <div class="store-item-price">₹299</div>
+                <h3 class="store-item-name">Diamond Rank</h3>
+                <div class="store-item-plan">Monthly Plan</div>
+                <div class="store-item-price">₹59/month</div>
                 <ul class="store-item-features">
-                    <li>All VIP perks</li>
-                    <li>Access to /fly (creative)</li>
-                    <li>6 /home locations</li>
-                    <li>Claim 5 chunks</li>
+                    <li>Auto Feed</li>
+                    <li>Heal ability</li>
+                    <li>Miner (Haste I)</li>
+                    <li>2 homes</li>
+                    <li>Chat color</li>
                 </ul>
                 <div class="store-item-buttons">
                     <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
@@ -99,16 +81,19 @@
             </div>
         </div>
 
-        <div class="store-item" data-category="ranks">
-            <div class="store-item-image">⭐</div>
+        <div class="store-item store-item--popular" data-category="ranks">
+            <div class="store-item-image">🛡️</div>
             <div class="store-item-content">
-                <h3 class="store-item-name">MVP Rank</h3>
-                <div class="store-item-price">₹499</div>
+                <span class="store-item-badge">Most Popular</span>
+                <h3 class="store-item-name">Guardian Rank</h3>
+                <div class="store-item-plan">Monthly Plan</div>
+                <div class="store-item-price">₹129/month</div>
                 <ul class="store-item-features">
-                    <li>All VIP+ perks</li>
-                    <li>Unlimited /homes</li>
-                    <li>Unlimited /fly</li>
-                    <li>Access to /nick</li>
+                    <li>All Diamond perks</li>
+                    <li>Shield (Resistance)</li>
+                    <li>Scuba</li>
+                    <li>1 vault</li>
+                    <li>4 homes</li>
                 </ul>
                 <div class="store-item-buttons">
                     <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
@@ -118,15 +103,17 @@
         </div>
 
         <div class="store-item" data-category="ranks">
-            <div class="store-item-image">🔥</div>
+            <div class="store-item-image">🔮</div>
             <div class="store-item-content">
-                <h3 class="store-item-name">MVP+ Rank</h3>
-                <div class="store-item-price">₹799</div>
+                <h3 class="store-item-name">Mystic Rank</h3>
+                <div class="store-item-plan">Monthly Plan</div>
+                <div class="store-item-price">₹199/month</div>
                 <ul class="store-item-features">
-                    <li>All MVP perks</li>
-                    <li>Enderchest access</li>
-                    <li>Player vault (1)</li>
-                    <li>Exclusive kits</li>
+                    <li>All Guardian perks</li>
+                    <li>Night Vision</li>
+                    <li>Speed I</li>
+                    <li>Leap ability</li>
+                    <li>6 homes</li>
                 </ul>
                 <div class="store-item-buttons">
                     <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
@@ -136,15 +123,59 @@
         </div>
 
         <div class="store-item" data-category="ranks">
+            <div class="store-item-image">🌠</div>
+            <div class="store-item-content">
+                <h3 class="store-item-name">Astral Rank</h3>
+                <div class="store-item-plan">Monthly Plan</div>
+                <div class="store-item-price">₹299/month</div>
+                <ul class="store-item-features">
+                    <li>All Mystic perks</li>
+                    <li>Fire resistance</li>
+                    <li>Power I</li>
+                    <li>Enhanced shield</li>
+                    <li>8 homes</li>
+                </ul>
+                <div class="store-item-buttons">
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
+                    <button class="btn btn-secondary btn-small">Preview</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-item" data-category="ranks">
+            <div class="store-item-image">🌌</div>
+            <div class="store-item-content">
+                <h3 class="store-item-name">Cosmic Rank</h3>
+                <div class="store-item-plan">Monthly Plan</div>
+                <div class="store-item-price">₹499/month</div>
+                <ul class="store-item-features">
+                    <li>All Astral perks</li>
+                    <li>Float ability</li>
+                    <li>Speed II</li>
+                    <li>Inventory clear</li>
+                    <li>10 homes</li>
+                </ul>
+                <div class="store-item-buttons">
+                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
+                    <button class="btn btn-secondary btn-small">Preview</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="store-item store-item--ultimate" data-category="ranks">
             <div class="store-item-image">👑</div>
             <div class="store-item-content">
-                <h3 class="store-item-name">Legend Rank</h3>
-                <div class="store-item-price">₹1,499</div>
+                <span class="store-item-badge store-item-badge--ultimate">Ultimate</span>
+                <h3 class="store-item-name">Legacy Rank</h3>
+                <div class="store-item-plan">Monthly Plan</div>
+                <div class="store-item-price">₹799/month</div>
                 <ul class="store-item-features">
-                    <li>All MVP+ perks</li>
-                    <li>Full creative mode</li>
-                    <li>3 Player vaults</li>
+                    <li>All Cosmic perks</li>
+                    <li>Fly (LOBBY ONLY)</li>
+                    <li>Power II</li>
+                    <li>3 vaults</li>
                     <li>Custom prefix</li>
+                    <li>Particle effects</li>
                 </ul>
                 <div class="store-item-buttons">
                     <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
@@ -153,175 +184,11 @@
             </div>
         </div>
 
-        <!-- Bundles -->
-        <div class="store-item" data-category="bundles">
-            <div class="store-item-image">📦</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Starter Bundle</h3>
-                <div class="store-item-price">₹99</div>
-                <ul class="store-item-features">
-                    <li>Diamond tools set</li>
-                    <li>50,000 in-game currency</li>
-                    <li>10 obsidian</li>
-                    <li>Starter food items</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="store-item" data-category="bundles">
-            <div class="store-item-image">💰</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Economy Bundle</h3>
-                <div class="store-item-price">₹199</div>
-                <ul class="store-item-features">
-                    <li>250,000 in-game currency</li>
-                    <li>Iron golem spawner</li>
-                    <li>3 Shulker boxes</li>
-                    <li>Trading permits</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="store-item" data-category="bundles">
-            <div class="store-item-image">🏠</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Builder Bundle</h3>
-                <div class="store-item-price">₹349</div>
-                <ul class="store-item-features">
-                    <li>500+ decorative blocks</li>
-                    <li>Custom furniture items</li>
-                    <li>20 /claim blocks</li>
-                    <li>Building tools</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cosmetics -->
-        <div class="store-item" data-category="cosmetics">
-            <div class="store-item-image">🎭</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Pet Collection</h3>
-                <div class="store-item-price">₹249</div>
-                <ul class="store-item-features">
-                    <li>5 unique pets</li>
-                    <li>Wolf, Ocelot, Parrot</li>
-                    <li>Horse armor sets</li>
-                    <li>Pet cosmetics</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="store-item" data-category="cosmetics">
-            <div class="store-item-image">⚡</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Particle Effects</h3>
-                <div class="store-item-price">₹179</div>
-                <ul class="store-item-features">
-                    <li>10 particle effects</li>
-                    <li>Flames, hearts, stars</li>
-                    <li>Custom trails</li>
-                    <li>Toggle anytime</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="store-item" data-category="cosmetics">
-            <div class="store-item-image">🎨</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Armor Skins</h3>
-                <div class="store-item-price">₹399</div>
-                <ul class="store-item-features">
-                    <li>15 armor skin sets</li>
-                    <li>Neon, crystal, legendary</li>
-                    <li>Custom leather colors</li>
-                    <li>Exclusive designs</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Special Items -->
-        <div class="store-item" data-category="special">
-            <div class="store-item-image">🔑</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Key Pack (10 Keys)</h3>
-                <div class="store-item-price">₹129</div>
-                <ul class="store-item-features">
-                    <li>10 Mystery Keys</li>
-                    <li>Win rare items</li>
-                    <li>Exclusive crates</li>
-                    <li>Daily rewards</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="store-item" data-category="special">
-            <div class="store-item-image">🏆</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Monthly Token</h3>
-                <div class="store-item-price">₹599</div>
-                <ul class="store-item-features">
-                    <li>Monthly subscription</li>
-                    <li>5000 tokens/month</li>
-                    <li>Exclusive monthly perks</li>
-                    <li>Priority support</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="store-item" data-category="special">
-            <div class="store-item-image">💍</div>
-            <div class="store-item-content">
-                <h3 class="store-item-name">Custom Rename</h3>
-                <div class="store-item-price">₹49</div>
-                <ul class="store-item-features">
-                    <li>Rename any item</li>
-                    <li>Custom colors</li>
-                    <li>Special characters</li>
-                    <li>Instant delivery</li>
-                </ul>
-                <div class="store-item-buttons">
-                    <button class="btn btn-yellow btn-small purchase-btn" type="button">Buy Now</button>
-                    <button class="btn btn-secondary btn-small">Preview</button>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="store-empty-state" id="storeEmptyState" hidden>
         <div class="store-empty-card">
             <h2>No matching items</h2>
-            <p>Try another search term or switch back to a different category.</p>
+            <p>Try another search term to find a rank plan.</p>
         </div>
     </div>
 

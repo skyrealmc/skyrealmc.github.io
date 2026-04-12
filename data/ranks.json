@@ -1,0 +1,101 @@
+{
+  "ladder": [
+    "Diamond",
+    "Guardian",
+    "Mystic",
+    "Astral",
+    "Cosmic",
+    "Legacy"
+  ],
+  "ranks": [
+    {
+      "name": "Diamond",
+      "icon": "💎",
+      "price": 59,
+      "category": "ranks",
+      "planLabel": "Monthly Plan",
+      "perks": [
+        "Auto Feed",
+        "Heal ability",
+        "Miner (Haste I)",
+        "2 homes",
+        "Chat color"
+      ]
+    },
+    {
+      "name": "Guardian",
+      "icon": "🛡️",
+      "price": 129,
+      "category": "ranks",
+      "planLabel": "Monthly Plan",
+      "badge": "Most Popular",
+      "highlight": "popular",
+      "perks": [
+        "All Diamond perks",
+        "Shield (Resistance)",
+        "Scuba",
+        "1 vault",
+        "4 homes"
+      ]
+    },
+    {
+      "name": "Mystic",
+      "icon": "🔮",
+      "price": 199,
+      "category": "ranks",
+      "planLabel": "Monthly Plan",
+      "perks": [
+        "All Guardian perks",
+        "Night Vision",
+        "Speed I",
+        "Leap ability",
+        "6 homes"
+      ]
+    },
+    {
+      "name": "Astral",
+      "icon": "🌠",
+      "price": 299,
+      "category": "ranks",
+      "planLabel": "Monthly Plan",
+      "perks": [
+        "All Mystic perks",
+        "Fire resistance",
+        "Power I",
+        "Enhanced shield",
+        "8 homes"
+      ]
+    },
+    {
+      "name": "Cosmic",
+      "icon": "🌌",
+      "price": 499,
+      "category": "ranks",
+      "planLabel": "Monthly Plan",
+      "perks": [
+        "All Astral perks",
+        "Float ability",
+        "Speed II",
+        "Inventory clear",
+        "10 homes"
+      ]
+    },
+    {
+      "name": "Legacy",
+      "icon": "👑",
+      "price": 799,
+      "category": "ranks",
+      "planLabel": "Monthly Plan",
+      "badge": "Ultimate",
+      "highlight": "ultimate",
+      "perks": [
+        "All Cosmic perks",
+        "Fly (LOBBY ONLY)",
+        "Power II",
+        "3 vaults",
+        "Custom prefix",
+        "Particle effects"
+      ]
+    }
+  ]
+}
