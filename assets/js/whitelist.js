@@ -1,12 +1,17 @@
 /**
  * Sky Realms SMP - Whitelist Application
- * Client-side validation + local queue storage.
+ * Client-side validation + backend API integration.
  */
 
 const WHITELIST_STORAGE_KEY = 'skyrealms-whitelist-applications-v1';
+const API_ENDPOINT = 'https://skybot.up.railway.app/api/whitelist/apply';
 
 function isValidMinecraftUsername(username) {
     return /^[A-Za-z0-9_]{3,16}$/.test(username);
+}
+
+function isValidDiscordId(discordId) {
+    return /^\d{17,19}$/.test(discordId);
 }
 
 function showWhitelistMessage(element, text, type) {
@@ -28,6 +33,33 @@ function saveApplications(applications) {
     localStorage.setItem(WHITELIST_STORAGE_KEY, JSON.stringify(applications));
 }
 
+async function submitToBackend(minecraftUsername, discordUsername, email, age) {
+    try {
+        const response = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                minecraftUsername,
+                discordId: discordUsername,
+                email,
+                age
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || `Server error: ${response.status}`);
+        }
+
+        return { success: true, data };
+    } catch (error) {
+        throw error;
+    }
+}
+
 function initWhitelistForm() {
     const form = document.getElementById('whitelistForm');
     const message = document.getElementById('whitelistMessage');
@@ -45,7 +77,7 @@ function initWhitelistForm() {
         applyOverlay.hidden = applicationsOpen;
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         if (!applicationsOpen) {
@@ -72,8 +104,8 @@ function initWhitelistForm() {
             return;
         }
 
-        if (discordUsername.length < 2) {
-            showWhitelistMessage(message, 'Enter a valid Discord username.', 'error');
+        if (!discordUsername) {
+            showWhitelistMessage(message, 'Enter a valid Discord ID.', 'error');
             return;
         }
 
@@ -92,28 +124,45 @@ function initWhitelistForm() {
             return;
         }
 
-        const applications = loadApplications();
+        applyButton.disabled = true;
+        showWhitelistMessage(message, 'Submitting your application...', 'info');
 
-        const application = {
-            id: `WL-${Date.now()}`,
-            minecraftUsername,
-            discordUsername,
-            email,
-            age,
-            status: 'pending',
-            submittedAt: new Date().toISOString()
-        };
+        try {
+            const result = await submitToBackend(minecraftUsername, discordUsername, email, age);
 
-        applications.push(application);
-        saveApplications(applications);
+            const applications = loadApplications();
+            const application = {
+                id: `WL-${Date.now()}`,
+                minecraftUsername,
+                discordUsername,
+                email,
+                age,
+                status: 'pending',
+                submittedAt: new Date().toISOString()
+            };
+            applications.push(application);
+            saveApplications(applications);
 
-        showWhitelistMessage(
-            message,
-            `Application saved for ${minecraftUsername}. Staff review will be announced during the open whitelist window, and follow-up will use ${email}.`,
-            'success'
-        );
+            showWhitelistMessage(
+                message,
+                `✓ Application submitted for ${minecraftUsername}! Check your email (${email}) for updates. Staff will review your application and announce results in Discord.`,
+                'success'
+            );
 
-        form.reset();
+            form.reset();
+        } catch (error) {
+            let errorMessage = error.message || 'Failed to submit application. Please try again.';
+            
+            if (error.message.includes('duplicate')) {
+                errorMessage = 'You have already submitted an application. Please wait for staff review.';
+            } else if (error.message.includes('closed')) {
+                errorMessage = 'Whitelist applications are currently closed.';
+            }
+
+            showWhitelistMessage(message, errorMessage, 'error');
+        } finally {
+            applyButton.disabled = !applicationsOpen;
+        }
     });
 }
 

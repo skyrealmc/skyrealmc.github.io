@@ -19,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/whitelist.css">
     <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
     <meta name="theme-color" content="#7B2FF7">
 </head>
@@ -57,8 +58,9 @@
                 </div>
 
                 <div class="whitelist-field">
-                    <label for="discordUsername">Discord Username</label>
-                    <input id="discordUsername" name="discordUsername" type="text" minlength="2" maxlength="64" placeholder="e.g. skyrealms_user" required>
+                    <label for="discordUsername">Discord User ID</label>
+                    <input id="discordUsername" name="discordUsername" type="text" placeholder="e.g. 123456789012345678" title="Your Discord User ID (17-19 digit number)" required>
+                    <small style="display: block; margin-top: 4px; opacity: 0.7;">Find your ID: Right-click your Discord profile → Copy User ID</small>
                 </div>
 
                 <div class="whitelist-field">
