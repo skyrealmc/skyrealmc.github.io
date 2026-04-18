@@ -7,6 +7,7 @@
 // Site Constants
 // ========================================
 const SERVER_IP = 'play.skyrealm.fun';
+const BEDROCK_SERVER_ADDRESS = 'play.skyrealm.fun:25773';
 const DISCORD_INVITE_URL = 'https://discord.gg/tXW3Aj9wQh';
 const LAUNCH_DATE_UTC = '2026-04-01T00:00:00Z';
 let activeDialogEscapeHandler = null;
@@ -206,6 +207,43 @@ function initLaunchCountdown() {
 }
 
 // ========================================
+// Server Status (Home Page)
+// ========================================
+function initServerStatus() {
+    const statusEl = document.getElementById('status');
+    const playersEl = document.getElementById('players');
+    if (!statusEl || !playersEl) return;
+
+    const endpoint = `https://api.mcstatus.io/v2/status/bedrock/${BEDROCK_SERVER_ADDRESS}`;
+
+    async function fetchStatus() {
+        try {
+            const response = await fetch(endpoint, { cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`Status request failed: ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (data.online) {
+                const onlinePlayers = data.players?.online ?? 0;
+                const maxPlayers = data.players?.max ?? '?';
+                statusEl.innerText = 'Online';
+                playersEl.innerText = `Players: ${onlinePlayers}/${maxPlayers}`;
+            } else {
+                statusEl.innerText = 'Offline';
+                playersEl.innerText = '';
+            }
+        } catch (error) {
+            statusEl.innerText = 'Error';
+            playersEl.innerText = '';
+        }
+    }
+
+    fetchStatus();
+    setInterval(fetchStatus, 15000);
+}
+
+// ========================================
 // Shared Notice System
 // ========================================
 function getNoticeContainer() {
@@ -333,6 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initNavbarScroll();
     initLaunchCountdown();
+    initServerStatus();
 });
 
 // ========================================
@@ -388,6 +427,7 @@ window.SkyRealms = {
     initScrollAnimations,
     initNavbarScroll,
     initLaunchCountdown,
+    initServerStatus,
     showSiteNotice,
     openSiteDialog,
     closeSiteDialog

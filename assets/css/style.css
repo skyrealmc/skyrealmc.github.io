@@ -501,6 +501,38 @@ img {
   color: var(--text-main);
 }
 
+.server-status-section {
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.server-status-box {
+  background: var(--card-bg);
+  border: 1px solid rgba(123, 47, 247, 0.3);
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.server-status-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.server-status-box #status {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-main);
+}
+
+.server-status-box #players {
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
 /* ========================================
    Sections
    ======================================== */
