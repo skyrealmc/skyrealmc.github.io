@@ -214,6 +214,7 @@ function initServerStatus() {
     const statusEl = document.getElementById('status');
     const playersEl = document.getElementById('players');
     const heroServerStatusEl = document.getElementById('heroServerStatus');
+    const heroPlayerCountEl = document.getElementById('heroPlayerCount');
     if (!statusEl || !playersEl) return;
 
     const endpoint = `https://api.mcstatus.io/v2/status/bedrock/${BEDROCK_SERVER_ADDRESS}`;
@@ -234,11 +235,17 @@ function initServerStatus() {
                 if (heroServerStatusEl) {
                     heroServerStatusEl.innerText = 'Online';
                 }
+                if (heroPlayerCountEl) {
+                    heroPlayerCountEl.innerText = `${onlinePlayers}/${maxPlayers}`;
+                }
             } else {
                 statusEl.innerText = 'Offline';
                 playersEl.innerText = '';
                 if (heroServerStatusEl) {
                     heroServerStatusEl.innerText = 'Offline';
+                }
+                if (heroPlayerCountEl) {
+                    heroPlayerCountEl.innerText = '--';
                 }
             }
         } catch (error) {
@@ -246,6 +253,9 @@ function initServerStatus() {
             playersEl.innerText = '';
             if (heroServerStatusEl) {
                 heroServerStatusEl.innerText = 'Offline';
+            }
+            if (heroPlayerCountEl) {
+                heroPlayerCountEl.innerText = '--';
             }
         }
     }
