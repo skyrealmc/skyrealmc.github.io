@@ -7,6 +7,7 @@
 // Site Constants
 // ========================================
 const SERVER_IP = 'play.skyrealm.fun';
+const SERVER_PORT = '25773';
 const BEDROCK_SERVER_ADDRESS = 'play.skyrealm.fun:25773';
 const DISCORD_INVITE_URL = 'https://discord.gg/tXW3Aj9wQh';
 const LAUNCH_DATE_UTC = '2026-04-01T00:00:00Z';
@@ -62,14 +63,14 @@ function copyServerIP() {
             // Reset after 2 seconds
             setTimeout(() => {
                 copyBtn.classList.remove('copied');
-                copyBtn.querySelector('span:first-child').textContent = 'Copy IP';
+                copyBtn.querySelector('span:first-child').textContent = 'Copy IP:Port';
             }, 2000);
         }
     };
 
     const fallbackCopy = () => {
         const textArea = document.createElement('textarea');
-        textArea.value = SERVER_IP;
+        textArea.value = BEDROCK_SERVER_ADDRESS;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
@@ -80,7 +81,7 @@ function copyServerIP() {
 
     // Copy to clipboard
     if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(SERVER_IP).then(onCopied).catch(fallbackCopy);
+        navigator.clipboard.writeText(BEDROCK_SERVER_ADDRESS).then(onCopied).catch(fallbackCopy);
         return;
     }
 
@@ -422,6 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Export functions for use in other scripts
 window.SkyRealms = {
     SERVER_IP,
+    SERVER_PORT,
     DISCORD_INVITE_URL,
     copyServerIP,
     initScrollAnimations,

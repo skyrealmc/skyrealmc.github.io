@@ -218,7 +218,7 @@ class Modal {
                 </div>
                 
                 <!-- PAYMENT API INTEGRATION PLACEHOLDER -->
-                <button class="btn btn-primary" style="width:100%;margin-bottom:10px;" onclick="alert('Payment integration coming soon!');">
+                <button class="btn btn-primary" style="width:100%;margin-bottom:10px;" onclick="alert('Payment integration is not available yet.');">
                     Pay with Card/UPI
                 </button>
                 <p style="color:#A1A1AA;font-size:12px;margin-top:15px;">
