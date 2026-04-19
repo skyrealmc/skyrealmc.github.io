@@ -34,30 +34,35 @@ function saveApplications(applications) {
 }
 
 async function submitToBackend(minecraftUsername, discordUsername, email, age) {
-    try {
-        const response = await fetch(API_ENDPOINT, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                minecraftUsername,
-                discordId: discordUsername,
-                email,
-                age
-            })
-        });
+    const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            minecraftUsername,
+            discordId: discordUsername,
+            email,
+            age
+        })
+    });
 
-        const data = await response.json();
+    const rawBody = await response.text();
+    let data = {};
 
-        if (!response.ok) {
-            throw new Error(data.message || `Server error: ${response.status}`);
+    if (rawBody) {
+        try {
+            data = JSON.parse(rawBody);
+        } catch (parseError) {
+            data = { message: rawBody };
         }
-
-        return { success: true, data };
-    } catch (error) {
-        throw error;
     }
+
+    if (!response.ok) {
+        throw new Error(data.message || data.error || `Server error: ${response.status}`);
+    }
+
+    return { success: true, data };
 }
 
 function initWhitelistForm() {
@@ -104,8 +109,8 @@ function initWhitelistForm() {
             return;
         }
 
-        if (!discordUsername) {
-            showWhitelistMessage(message, 'Enter a valid Discord ID.', 'error');
+        if (!isValidDiscordId(discordUsername)) {
+            showWhitelistMessage(message, 'Enter a valid Discord User ID (17-19 digits).', 'error');
             return;
         }
 
@@ -152,6 +157,10 @@ function initWhitelistForm() {
             form.reset();
         } catch (error) {
             let errorMessage = error.message || 'Failed to submit application. Please try again.';
+
+            if (error instanceof TypeError || /Failed to fetch/i.test(errorMessage)) {
+                errorMessage = 'Unable to reach the whitelist server. Open this site using https://skyrealm.fun and try again without VPN/ad-block network filters.';
+            }
             
             if (error.message.includes('duplicate')) {
                 errorMessage = 'You have already submitted an application. Please wait for staff review.';
