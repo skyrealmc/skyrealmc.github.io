@@ -4,7 +4,7 @@
  */
 
 const WHITELIST_STORAGE_KEY = 'skyrealms-whitelist-applications-v1';
-const API_ENDPOINT = 'https://skybot.up.railway.app/api/whitelist/apply';
+const API_ENDPOINT = 'https://skybot.skyrealm.fun/api/whitelist/apply';
 
 function isValidMinecraftUsername(username) {
     return /^[A-Za-z0-9_]{3,16}$/.test(username);
