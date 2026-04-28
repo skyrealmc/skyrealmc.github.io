@@ -50,6 +50,7 @@ function updateDiscordUI(user) {
     const discordField = document.getElementById('discordUsernameField');
 
     if (user) {
+        console.log('Discord verified, hiding manual ID field');
         statusText.textContent = user.username;
         statusText.classList.add('connected');
         detailText.textContent = `Discord ID: ${user.id} (Verified)`;
@@ -68,10 +69,11 @@ function updateDiscordUI(user) {
 
         if (discordInput) {
             discordInput.value = user.id;
+            discordInput.required = false; // Remove required attribute
         }
 
         if (discordField) {
-            discordField.style.display = 'none';
+            discordField.setAttribute('style', 'display: none !important'); // Force hide
         }
     } else {
         statusText.textContent = 'Discord Not Connected';
@@ -96,6 +98,7 @@ function updateDiscordUI(user) {
 
         if (discordInput) {
             discordInput.value = '';
+            discordInput.required = true; // Restore required attribute
         }
 
         if (discordField) {
