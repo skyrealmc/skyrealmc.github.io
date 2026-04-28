@@ -99,7 +99,7 @@ function updateDiscordUI(user) {
 }
 
 function handleDiscordLogin() {
-    const returnUrl = window.location.href;
+    const returnUrl = window.location.origin + window.location.pathname;
     window.location.href = `${AUTH_LOGIN_ENDPOINT}?returnUrl=${encodeURIComponent(returnUrl)}`;
 }
 
