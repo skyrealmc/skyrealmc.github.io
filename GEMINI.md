@@ -27,7 +27,7 @@ This project is the official website for **Sky Realms SMP**, a Minecraft Bedrock
 ## Key Features
 - **Server Launch Countdown:** Real-time countdown to Season 2 launch (UTC-based).
 - **Server Status Checker:** Automatically checks if `play.skyrealm.fun:25773` is online.
-- **Whitelist Application:** Interactive form for players to apply for server access.
+- **Whitelist Application:** Interactive form for players to apply for server access with **Discord OAuth2 integration** for ID verification.
 - **Store Showcase:** Dynamic rendering of ranks and perks from `ranks.json`.
 - **Redeem System:** Client-side mock for redeeming gift codes.
 - **Shared UI System:** Custom dialog/modal and notification (toast) system defined in `main.js`.
@@ -35,7 +35,10 @@ This project is the official website for **Sky Realms SMP**, a Minecraft Bedrock
 ## Development Conventions
 1. **Global Namespace:** Shared functions are exposed on `window.SkyRealms`, `window.SkyRealmsUtils`, and `window.SkyRealmsAPI`.
 2. **Vanilla JS:** Avoid external libraries unless necessary. Use the provided utility functions in `utils.js`.
-3. **Mocking:** Most backend-related tasks (Auth, Payments) are currently mocked in `api.js`. Future implementations should replace these with actual API calls to `https://api.skyrealm.fun`.
+3. **Backend Integration:**
+   - **Whitelist:** Connected to `https://skybot.skyrealm.fun/api/whitelist/apply`.
+   - **Discord Auth:** Integrated with `https://skybot.skyrealm.fun/auth/` for session management and OAuth.
+   - **Mocking:** Payments and some other API tasks are currently mocked in `api.js`.
 4. **Styling:** CSS uses variables for theming (mostly purple/neon). Responsive design is handled via media queries in `style.css`.
 5. **Rate Limiting:** A client-side mock `RateLimiter` is available in `utils.js` for sensitive actions like form submissions and code redemptions.
 
@@ -50,7 +53,6 @@ As a static website, there is no build process.
 - **Deployment:** Push to the `main` branch to trigger GitHub Pages deployment.
 
 ## TODO / Future Roadmap
-- [ ] Connect `api.js` to a real backend.
-- [ ] Implement actual Discord OAuth or custom user authentication.
+- [ ] Connect `api.js` to a real backend for all services.
 - [ ] Integrate a payment gateway (Stripe/PayPal) for the store.
-- [ ] Implement server-side whitelist validation.
+- [ ] Implement server-side whitelist validation (fully integrated with bot).

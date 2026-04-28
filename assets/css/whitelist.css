@@ -1848,3 +1848,114 @@ img {
    - Active subscriptions
    - Profile settings
 */
+
+/* ========================================
+   Discord Auth Styles
+   ======================================== */
+.discord-auth-container {
+  background: rgba(88, 101, 242, 0.1);
+  border: 1px solid rgba(88, 101, 242, 0.3);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+  transition: var(--transition);
+}
+
+.discord-auth-container:hover {
+  background: rgba(88, 101, 242, 0.15);
+  border-color: rgba(88, 101, 242, 0.5);
+}
+
+.discord-auth-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.discord-avatar-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #5865F2;
+  object-fit: cover;
+}
+
+.discord-avatar-img.hidden {
+  display: none;
+}
+
+.discord-auth-text {
+  flex: 1;
+}
+
+.discord-auth-status {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.discord-auth-status.connected {
+  color: #5865F2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.discord-auth-status.connected::after {
+  content: '✓ Verified';
+  font-size: 0.75rem;
+  background: #5865F2;
+  color: white;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.discord-auth-detail {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0 0;
+}
+
+.btn-discord {
+  background: #5865F2;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.btn-discord:hover {
+  background: #4752C4;
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.5);
+  transform: translateY(-2px);
+}
+
+.discord-icon {
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .discord-auth-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .discord-auth-info {
+    flex-direction: column;
+  }
+  
+  .btn-discord {
+    width: 100%;
+  }
+}
