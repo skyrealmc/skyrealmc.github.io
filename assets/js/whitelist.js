@@ -47,6 +47,7 @@ function updateDiscordUI(user) {
     const loginBtn = document.getElementById('discordLoginBtn');
     const avatarImg = document.getElementById('discordUserAvatar');
     const discordInput = document.getElementById('discordUsername');
+    const discordField = document.getElementById('discordUsernameField');
 
     if (user) {
         statusText.textContent = user.username;
@@ -67,8 +68,10 @@ function updateDiscordUI(user) {
 
         if (discordInput) {
             discordInput.value = user.id;
-            discordInput.readOnly = true;
-            discordInput.style.opacity = '0.7';
+        }
+
+        if (discordField) {
+            discordField.style.display = 'none';
         }
     } else {
         statusText.textContent = 'Discord Not Connected';
@@ -92,8 +95,11 @@ function updateDiscordUI(user) {
         }
 
         if (discordInput) {
-            discordInput.readOnly = false;
-            discordInput.style.opacity = '1';
+            discordInput.value = '';
+        }
+
+        if (discordField) {
+            discordField.style.display = 'block';
         }
     }
 }
