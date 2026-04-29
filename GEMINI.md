@@ -27,7 +27,7 @@ This project is the official website for **Sky Realms SMP**, a Minecraft Bedrock
 ## Key Features
 - **Server Launch Countdown:** Real-time countdown to Season 2 launch (UTC-based).
 - **Server Status Checker:** Automatically checks if `play.skyrealm.fun:25773` is online.
-- **Whitelist Application:** Interactive form for players to apply for server access with **Discord OAuth2 integration** for ID verification.
+- **Whitelist Application:** Interactive form with **Discord OAuth2 integration** and **Guild Membership Gate**. Only verified server members can apply.
 - **Store Showcase:** Dynamic rendering of ranks and perks from `ranks.json`.
 - **Redeem System:** Client-side mock for redeeming gift codes.
 - **Shared UI System:** Custom dialog/modal and notification (toast) system defined in `main.js`.
@@ -36,10 +36,14 @@ This project is the official website for **Sky Realms SMP**, a Minecraft Bedrock
 1. **Global Namespace:** Shared functions are exposed on `window.SkyRealms`, `window.SkyRealmsUtils`, and `window.SkyRealmsAPI`.
 2. **Vanilla JS:** Avoid external libraries unless necessary. Use the provided utility functions in `utils.js`.
 3. **Backend Integration:**
-   - **Whitelist:** Connected to `https://skybot.skyrealm.fun/api/whitelist/apply`.
+   - **Whitelist:** Connected to `https://skybot.skyrealm.fun/api/whitelist/apply` (Requires Auth + Guild).
    - **Discord Auth:** Integrated with `https://skybot.skyrealm.fun/auth/` for session management and OAuth.
+   - **Membership Gate:** Enforced via `requireGuildMember` middleware on the backend.
    - **Mocking:** Payments and some other API tasks are currently mocked in `api.js`.
-4. **Styling:** CSS uses variables for theming (mostly purple/neon). Responsive design is handled via media queries in `style.css`.
+4. **Environment Variables (Backend):**
+   - `DISCORD_GUILD_ID`: The ID of the Discord server users must join.
+   - `DISCORD_INVITE_URL`: Official invite link shown to non-members.
+5. **Styling:** CSS uses variables for theming (mostly purple/neon). Responsive design is handled via media queries in `style.css`.
 5. **Rate Limiting:** A client-side mock `RateLimiter` is available in `utils.js` for sensitive actions like form submissions and code redemptions.
 
 ## Building and Running

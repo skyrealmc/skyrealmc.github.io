@@ -1,6 +1,6 @@
 /**
  * Sky Realms SMP - Whitelist Application
- * Client-side validation + backend API integration + Discord Auth.
+ * Client-side validation + backend API integration + Discord Auth + Membership Gate.
  */
 
 const WHITELIST_STORAGE_KEY = 'skyrealms-whitelist-applications-v1';
@@ -19,7 +19,7 @@ function isValidDiscordId(discordId) {
 }
 
 function showWhitelistMessage(element, text, type) {
-    element.textContent = text;
+    element.innerHTML = text; // Allow HTML for links
     element.classList.remove('success', 'error', 'info');
     element.classList.add(type);
 }
@@ -50,10 +50,16 @@ function updateDiscordUI(user) {
     const discordField = document.getElementById('discordUsernameField');
 
     if (user) {
-        console.log('Discord verified, hiding manual ID field');
         statusText.textContent = user.username;
         statusText.classList.add('connected');
-        detailText.textContent = `Discord ID: ${user.id} (Verified)`;
+        
+        if (user.isGuildMember) {
+            detailText.textContent = `Discord ID: ${user.id} (Member Verified)`;
+            detailText.style.color = '#22C55E';
+        } else {
+            detailText.textContent = `Discord Linked, but not a member of the server.`;
+            detailText.style.color = '#EF4444';
+        }
         
         if (loginBtn) {
             loginBtn.innerHTML = '<span>Disconnect</span>';
@@ -69,16 +75,17 @@ function updateDiscordUI(user) {
 
         if (discordInput) {
             discordInput.value = user.id;
-            discordInput.required = false; // Remove required attribute
+            discordInput.required = false;
         }
 
         if (discordField) {
-            discordField.setAttribute('style', 'display: none !important'); // Force hide
+            discordField.setAttribute('style', 'display: none !important');
         }
     } else {
         statusText.textContent = 'Discord Not Connected';
         statusText.classList.remove('connected');
         detailText.textContent = 'Link your Discord for automatic ID verification.';
+        detailText.style.color = '';
         
         if (loginBtn) {
             loginBtn.innerHTML = `
@@ -98,7 +105,7 @@ function updateDiscordUI(user) {
 
         if (discordInput) {
             discordInput.value = '';
-            discordInput.required = true; // Restore required attribute
+            discordInput.required = true;
         }
 
         if (discordField) {
@@ -125,17 +132,15 @@ async function handleDiscordLogout() {
     }
 }
 
-function loadApplications() {
-    try {
-        const raw = localStorage.getItem(WHITELIST_STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
-    } catch (error) {
-        return [];
-    }
-}
-
-function saveApplications(applications) {
-    localStorage.setItem(WHITELIST_STORAGE_KEY, JSON.stringify(applications));
+function handleGuildRequiredError(messageElement, joinUrl) {
+    const html = `
+        <div style="margin-bottom: 10px;">You must be a member of our Discord server to apply.</div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="${joinUrl}" target="_blank" class="btn btn-discord btn-small" style="text-transform: none;">Join Discord</a>
+            <button type="button" class="btn btn-secondary btn-small" onclick="location.reload()" style="text-transform: none;">I've Joined (Retry)</button>
+        </div>
+    `;
+    showWhitelistMessage(messageElement, html, 'error');
 }
 
 async function submitToBackend(minecraftUsername, discordUsername, email, age) {
@@ -144,6 +149,7 @@ async function submitToBackend(minecraftUsername, discordUsername, email, age) {
         headers: {
             'Content-Type': 'application/json',
         },
+        credentials: 'include', // Important for membership check
         body: JSON.stringify({
             minecraftUsername,
             discordId: discordUsername,
@@ -164,7 +170,9 @@ async function submitToBackend(minecraftUsername, discordUsername, email, age) {
     }
 
     if (!response.ok) {
-        throw new Error(data.message || data.error || `Server error: ${response.status}`);
+        const error = new Error(data.message || data.error || `Server error: ${response.status}`);
+        error.data = data;
+        throw error;
     }
 
     return { success: true, data };
@@ -179,12 +187,10 @@ function initWhitelistForm() {
 
     if (!form || !message) return;
 
-    // Initialize Discord Login button
     if (loginBtn) {
         loginBtn.onclick = handleDiscordLogin;
     }
 
-    // Check if user is already logged in
     checkDiscordSession();
 
     if (applyButton) {
@@ -195,11 +201,7 @@ function initWhitelistForm() {
         event.preventDefault();
 
         if (!applicationsOpen) {
-            showWhitelistMessage(
-                message,
-                'Whitelist applications are currently closed.',
-                'error'
-            );
+            showWhitelistMessage(message, 'Whitelist applications are currently closed.', 'error');
             return;
         }
 
@@ -215,7 +217,7 @@ function initWhitelistForm() {
         }
 
         if (!isValidDiscordId(discordUsername)) {
-            showWhitelistMessage(message, 'Enter a valid Discord User ID (17-19 digits).', 'error');
+            showWhitelistMessage(message, 'Enter a valid Discord User ID (17-19 digits) or Link Discord above.', 'error');
             return;
         }
 
@@ -238,7 +240,7 @@ function initWhitelistForm() {
         showWhitelistMessage(message, 'Submitting...', 'info');
 
         try {
-            const result = await submitToBackend(minecraftUsername, discordUsername, email, age);
+            await submitToBackend(minecraftUsername, discordUsername, email, age);
 
             const applications = loadApplications();
             applications.push({
@@ -259,16 +261,22 @@ function initWhitelistForm() {
             );
 
             form.reset();
-            // If logged in, restore the ID
             if (currentUserSession) {
                 updateDiscordUI(currentUserSession);
             }
         } catch (error) {
-            let errorMessage = error.message || 'Failed to submit application.';
-            if (error.message.includes('duplicate')) {
-                errorMessage = 'You have already submitted an application in the last 24 hours.';
+            if (error.data?.error === 'GUILD_REQUIRED') {
+                handleGuildRequiredError(message, error.data.joinUrl);
+            } else if (error.data?.error === 'AUTH_REQUIRED' || error.data?.error === 'TOKEN_EXPIRED') {
+                showWhitelistMessage(message, 'Your session has expired. Please Link Discord again.', 'error');
+                updateDiscordUI(null);
+            } else {
+                let errorMessage = error.message || 'Failed to submit application.';
+                if (error.message.includes('duplicate')) {
+                    errorMessage = 'You have already submitted an application in the last 24 hours.';
+                }
+                showWhitelistMessage(message, errorMessage, 'error');
             }
-            showWhitelistMessage(message, errorMessage, 'error');
         } finally {
             applyButton.disabled = !applicationsOpen;
         }
