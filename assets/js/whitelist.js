@@ -1,6 +1,6 @@
 /**
  * Sky Realms SMP - Whitelist Application
- * Client-side validation + backend API integration + Discord Auth + Membership Gate.
+ * Client-side validation + backend API integration + Discord Auth + Membership Gate + Turnstile.
  */
 
 const WHITELIST_STORAGE_KEY = 'skyrealms-whitelist-applications-v1';
@@ -143,18 +143,19 @@ function handleGuildRequiredError(messageElement, joinUrl) {
     showWhitelistMessage(messageElement, html, 'error');
 }
 
-async function submitToBackend(minecraftUsername, discordUsername, email, age) {
+async function submitToBackend(minecraftUsername, discordUsername, email, age, turnstileToken) {
     const response = await fetch(API_ENDPOINT, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        credentials: 'include', // Important for membership check
+        credentials: 'include',
         body: JSON.stringify({
             minecraftUsername,
             discordId: discordUsername,
             email,
-            age
+            age,
+            turnstileToken // Send token to backend
         })
     });
 
@@ -210,6 +211,9 @@ function initWhitelistForm() {
         const email = form.email.value.trim();
         const age = Number(form.age.value);
         const agreeRules = form.agreeRules.checked;
+        
+        // Get Turnstile token
+        const turnstileToken = form.querySelector('[name="cf-turnstile-response"]')?.value;
 
         if (!isValidMinecraftUsername(minecraftUsername)) {
             showWhitelistMessage(message, 'Use a valid Minecraft username.', 'error');
@@ -236,11 +240,16 @@ function initWhitelistForm() {
             return;
         }
 
+        if (!turnstileToken) {
+            showWhitelistMessage(message, 'Please complete the security check.', 'error');
+            return;
+        }
+
         applyButton.disabled = true;
         showWhitelistMessage(message, 'Submitting...', 'info');
 
         try {
-            await submitToBackend(minecraftUsername, discordUsername, email, age);
+            await submitToBackend(minecraftUsername, discordUsername, email, age, turnstileToken);
 
             const applications = loadApplications();
             applications.push({
@@ -261,10 +270,20 @@ function initWhitelistForm() {
             );
 
             form.reset();
+            // Reset Turnstile
+            if (window.turnstile) {
+                window.turnstile.reset();
+            }
+            
             if (currentUserSession) {
                 updateDiscordUI(currentUserSession);
             }
         } catch (error) {
+            // Reset Turnstile on error
+            if (window.turnstile) {
+                window.turnstile.reset();
+            }
+
             if (error.data?.error === 'GUILD_REQUIRED') {
                 handleGuildRequiredError(message, error.data.joinUrl);
             } else if (error.data?.error === 'AUTH_REQUIRED' || error.data?.error === 'TOKEN_EXPIRED') {
