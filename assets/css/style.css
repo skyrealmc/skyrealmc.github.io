@@ -31,7 +31,8 @@
   --glow-yellow: 0 0 20px rgba(250, 204, 21, 0.5);
   --glow-success: 0 0 20px rgba(34, 197, 94, 0.5);
   --glow-danger: 0 0 20px rgba(239, 68, 68, 0.5);
-  --font-heading: 'Orbitron', sans-serif;
+  --font-heading: "Trebuchet MS", "Segoe UI", "Arial Black", sans-serif;
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   
   /* Spacing */
   --border-radius: 16px;
@@ -52,11 +53,13 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   background-color: var(--bg-main);
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.dialog-open {
@@ -98,6 +101,14 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar.is-scrolled {
+  background: rgba(15, 15, 26, 0.98);
+  box-shadow: 0 2px 20px rgba(139, 92, 246, 0.2);
 }
 
 .logo {
@@ -171,7 +182,7 @@ img {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 1.75rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
   border: none;
@@ -242,6 +253,7 @@ img {
    ======================================== */
 .hero {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -333,6 +345,7 @@ img {
   position: relative;
   z-index: 1;
   margin-top: 2.25rem;
+  width: min(100%, 72rem);
 }
 
 .hero-title {
@@ -418,7 +431,7 @@ img {
 }
 
 .server-info-value {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
   color: var(--primary);
 }
@@ -535,6 +548,8 @@ img {
   padding: 5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
 }
 
 .section-title {
@@ -826,6 +841,12 @@ img {
   overflow: hidden;
   border: 2px solid rgba(123, 47, 247, 0.1);
   transition: var(--transition);
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 520px;
+}
+
+.store-item.is-hidden {
+  display: none;
 }
 
 .store-item:hover {
@@ -896,7 +917,7 @@ img {
 }
 
 .store-item-price {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--accent-yellow);
@@ -967,6 +988,8 @@ img {
   border: 2px solid rgba(123, 47, 247, 0.2);
   transition: var(--transition);
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 360px;
 }
 
 .code-product:hover {
@@ -1601,7 +1624,7 @@ img {
 .site-dialog-price {
   text-align: center;
   color: var(--accent-yellow);
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.4rem;
   margin-bottom: 0.75rem;
 }
@@ -1678,6 +1701,8 @@ img {
     transform: translateY(-150%);
     transition: var(--transition);
     border-bottom: 1px solid rgba(123, 47, 247, 0.2);
+    max-height: calc(100svh - 70px);
+    overflow-y: auto;
   }
   
   .nav-links.active {
@@ -1713,6 +1738,10 @@ img {
     align-items: center;
   }
 
+  .hero-buttons .btn {
+    width: min(100%, 24rem);
+  }
+
   .hero-status-strip {
     display: flex;
     justify-content: center;
@@ -1725,6 +1754,14 @@ img {
   .server-info {
     flex-direction: column;
     gap: 1rem;
+    width: min(100%, 28rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .server-info-item {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .launch-countdown-grid {
@@ -1762,6 +1799,12 @@ img {
     text-align: center;
   }
 
+  .history-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
   .whitelist-form {
     grid-template-columns: 1fr;
   }
@@ -1789,6 +1832,10 @@ img {
 }
 
 @media (max-width: 480px) {
+  .logo {
+    font-size: 1.1rem;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
@@ -1806,6 +1853,10 @@ img {
   }
   
   .code-product {
+    padding: 1rem;
+  }
+
+  .site-dialog {
     padding: 1rem;
   }
 }
