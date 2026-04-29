@@ -7,9 +7,30 @@ const WHITELIST_STORAGE_KEY = 'skyrealms-whitelist-applications-v1';
 const API_ENDPOINT = 'https://skybot.skyrealm.fun/api/whitelist/apply';
 const AUTH_SESSION_ENDPOINT = 'https://skybot.skyrealm.fun/auth/session';
 const AUTH_LOGIN_ENDPOINT = 'https://skybot.skyrealm.fun/auth/login';
+const AUTH_LOGOUT_ENDPOINT = 'https://skybot.skyrealm.fun/auth/logout';
 
 let currentUserSession = null;
 let turnstileVerified = false;
+
+function loadApplications() {
+    try {
+        const raw = localStorage.getItem(WHITELIST_STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+        console.warn('Failed to read saved whitelist applications:', error);
+        return [];
+    }
+}
+
+function saveApplications(applications) {
+    try {
+        localStorage.setItem(WHITELIST_STORAGE_KEY, JSON.stringify(applications));
+    } catch (error) {
+        console.warn('Failed to store whitelist applications:', error);
+    }
+}
 
 function isValidMinecraftUsername(username) {
     return /^[A-Za-z0-9_]{3,16}$/.test(username);
@@ -148,7 +169,7 @@ function handleDiscordLogin() {
 
 async function handleDiscordLogout() {
     try {
-        await fetch('https://skybot.skyrealm.fun/auth/logout', { method: 'POST', credentials: 'include' });
+        await fetch(AUTH_LOGOUT_ENDPOINT, { method: 'POST', credentials: 'include' });
         currentUserSession = null;
         updateDiscordUI(null);
         
@@ -316,8 +337,8 @@ function initWhitelistForm() {
 
             if (error.data?.error === 'GUILD_REQUIRED') {
                 handleGuildRequiredError(message, error.data.joinUrl);
-            } else if (error.data?.error === 'AUTH_REQUIRED' || error.data?.error === 'TOKEN_EXPIRED') {
-                showWhitelistMessage(message, 'Your session has expired. Please Link Discord again.', 'error');
+            } else if (error.data?.error === 'AUTH_REQUIRED' || error.data?.error === 'TOKEN_EXPIRED' || error.message === 'Authentication required.') {
+                showWhitelistMessage(message, 'Please Link Discord before submitting your whitelist application.', 'error');
                 updateDiscordUI(null);
             } else {
                 let errorMessage = error.message || 'Failed to submit application.';

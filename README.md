@@ -1,54 +1,65 @@
 # Sky Realms SMP - Official Website
 
-The frontend for the **Sky Realms SMP**, a Minecraft Bedrock Edition server. This is a static web application hosted on GitHub Pages, designed to provide information, handle whitelist applications, and showcase community resources.
+Static frontend for the Sky Realms SMP community site. The website is hosted on GitHub Pages and uses the `skybot-official` backend for Discord authentication and whitelist submission.
 
-## 🚀 Key Features
+## Features
 
-- **Discord OAuth2 Integration**: Securely link your Discord account to verify your identity.
-- **Whitelist Application Gate**: 
-    - **Guild Membership Check**: Only members of our official Discord server can submit whitelist applications.
-    - **Automatic ID Capture**: Verified Discord IDs are automatically filled and locked in the form, preventing entry errors.
-- **Bot Protection**: Integrated with **Cloudflare Turnstile** to ensure all submissions are human-verified.
-- **Real-time Server Status**: Checks the live status of `play.skyrealm.fun`.
-- **Launch Countdown**: Dynamic countdown to the Season 2 launch.
-- **Design System**: High-performance "Purple Edition" aesthetic with responsive layouts and neon animations.
+- Landing page, rules, store, redeem, and whitelist pages
+- Discord OAuth-based whitelist application flow
+- Guild membership gate before whitelist submission
+- Cloudflare Turnstile protection on the whitelist form
+- Live Bedrock server status via `mcstatus.io`
+- Responsive static frontend with no build step
 
-## 🛠️ Technology Stack
+## Integration With Bot Backend
 
-- **Frontend**: HTML5, Vanilla CSS, Vanilla JavaScript.
-- **Integrations**:
-    - **Backend**: Communicates with [SkyBot S2](https://github.com/skyrealmc/skybot-official) via REST API.
-    - **Auth**: Discord OAuth2 (Authorization Code Flow).
-    - **Security**: Cloudflare Turnstile.
-    - **Status**: [mcstatus.io](https://mcstatus.io/) API.
+The website is wired to the bot backend hosted at `https://skybot.skyrealm.fun`.
 
-## 📂 Project Structure
+Current backend dependencies:
 
-- `/`: Landing page (`index.html`).
-- `/whitelist/`: Secure whitelist application form.
-- `/store/`: Rank hierarchy and perk showcase.
-- `/assets/`:
-    - `/css/`: Modular stylesheets (`style.css`, `whitelist.css`).
-    - `/js/`: Frontend logic (session management, API services, UI animations).
-- `dashboard.html`: Integrated user dashboard.
+- `GET /auth/login` - start Discord login
+- `GET /auth/session` - fetch current Discord session
+- `POST /auth/logout` - clear session
+- `POST /api/whitelist/apply` - submit whitelist application
 
-## 🔧 Development
+Whitelist submissions only succeed when the user:
 
-As a static site, no build process is required.
+- is logged in with Discord
+- is a member of the required Discord guild
+- completes Cloudflare Turnstile
 
-### Local Setup
-1. Clone the repository.
-2. Serve the directory using any static file server:
-   ```bash
-   npx serve .
-   # OR
-   python3 -m http.server 8000
-   ```
-3. Ensure your local backend is running if testing API features.
+## Project Structure
 
-## 📝 Recent Updates
+- `/index.html` - main landing page
+- `/whitelist/` - public whitelist application page
+- `/store/`, `/redeem/`, `/rules/` - static content pages
+- `/assets/css/` - shared site styling
+- `/assets/js/main.js` - shared UI and live server status logic
+- `/assets/js/whitelist.js` - Discord auth + whitelist form integration
+- `/dashboard.html` - static demo/dashboard mockup, not backed by live user data
 
-- **Feat**: Implemented **Guild Membership Gate** requiring users to be in the Discord server before applying.
-- **Feat**: Added **Cloudflare Turnstile** captcha for bot protection.
-- **Fix**: Improved OAuth redirect reliability using the `state` parameter.
-- **Fix**: Hidden manual Discord ID field for verified users to streamline UX.
+## Local Development
+
+Serve the repo with a static server:
+
+```bash
+npx serve .
+# or
+python3 -m http.server 8000
+```
+
+For whitelist testing, the bot backend must also be running and configured for cross-origin requests from your local origin.
+
+## Current Production Notes
+
+- Production domain: `https://skyrealm.fun`
+- Whitelist page uses cross-origin cookies with the bot backend
+- Server status is fetched directly from `https://api.mcstatus.io`
+- `dashboard.html` is demo content only and should not be treated as a live account dashboard
+
+## Recent Updates
+
+- Fixed Discord auth handling on the whitelist form
+- Added localStorage helpers used after successful whitelist submission
+- Improved user-facing message when Discord login is missing or expired
+- Confirmed website-to-bot backend wiring for whitelist and session flows
