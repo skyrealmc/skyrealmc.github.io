@@ -110,12 +110,16 @@
                 </div>
 
                 <div class="whitelist-field whitelist-full">
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAADFagNdcYCwTMTKN" data-theme="dark"></div>
+                    <div class="cf-turnstile" 
+                         data-sitekey="0x4AAAAAADFagNdcYCwTMTKN" 
+                         data-theme="dark"
+                         data-callback="onTurnstileSuccess"
+                         data-expired-callback="onTurnstileExpired"></div>
                 </div>
 
                 <div class="whitelist-field whitelist-full">
                     <div class="whitelist-apply-wrap">
-                        <button id="whitelistApplyBtn" type="submit" class="btn btn-primary">Apply Whitelist</button>
+                        <button id="whitelistApplyBtn" type="submit" class="btn btn-primary" disabled>Apply Whitelist</button>
                     </div>
                 </div>
 

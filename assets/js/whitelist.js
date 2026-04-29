@@ -9,6 +9,7 @@ const AUTH_SESSION_ENDPOINT = 'https://skybot.skyrealm.fun/auth/session';
 const AUTH_LOGIN_ENDPOINT = 'https://skybot.skyrealm.fun/auth/login';
 
 let currentUserSession = null;
+let turnstileVerified = false;
 
 function isValidMinecraftUsername(username) {
     return /^[A-Za-z0-9_]{3,16}$/.test(username);
@@ -22,6 +23,32 @@ function showWhitelistMessage(element, text, type) {
     element.innerHTML = text; // Allow HTML for links
     element.classList.remove('success', 'error', 'info');
     element.classList.add(type);
+}
+
+// ========================================
+// Turnstile Callbacks
+// ========================================
+window.onTurnstileSuccess = function(token) {
+    console.log('Turnstile verified');
+    turnstileVerified = true;
+    updateApplyButtonState();
+};
+
+window.onTurnstileExpired = function() {
+    console.log('Turnstile expired');
+    turnstileVerified = false;
+    updateApplyButtonState();
+};
+
+function updateApplyButtonState() {
+    const form = document.getElementById('whitelistForm');
+    const applyButton = document.getElementById('whitelistApplyBtn');
+    const applicationsOpen = form?.dataset.applicationsOpen === 'true';
+
+    if (!applyButton) return;
+
+    // Button should only be enabled if applications are open AND turnstile is verified
+    applyButton.disabled = !(applicationsOpen && turnstileVerified);
 }
 
 async function checkDiscordSession() {
@@ -194,9 +221,8 @@ function initWhitelistForm() {
 
     checkDiscordSession();
 
-    if (applyButton) {
-        applyButton.disabled = !applicationsOpen;
-    }
+    // Initial button state check
+    updateApplyButtonState();
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -271,6 +297,7 @@ function initWhitelistForm() {
 
             form.reset();
             // Reset Turnstile
+            turnstileVerified = false;
             if (window.turnstile) {
                 window.turnstile.reset();
             }
@@ -278,11 +305,14 @@ function initWhitelistForm() {
             if (currentUserSession) {
                 updateDiscordUI(currentUserSession);
             }
+            updateApplyButtonState();
         } catch (error) {
             // Reset Turnstile on error
+            turnstileVerified = false;
             if (window.turnstile) {
                 window.turnstile.reset();
             }
+            updateApplyButtonState();
 
             if (error.data?.error === 'GUILD_REQUIRED') {
                 handleGuildRequiredError(message, error.data.joinUrl);
@@ -297,7 +327,8 @@ function initWhitelistForm() {
                 showWhitelistMessage(message, errorMessage, 'error');
             }
         } finally {
-            applyButton.disabled = !applicationsOpen;
+            // updateApplyButtonState will keep it disabled until re-verified if reset
+            // but we want to ensure it stays disabled if we just submitted
         }
     });
 }
