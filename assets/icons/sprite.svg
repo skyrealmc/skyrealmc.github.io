@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+  <symbol id="icon-copy" viewBox="0 0 24 24">
+    <rect x="9" y="9" width="10" height="10" rx="2"/>
+    <path d="M7 15H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"/>
+  </symbol>
+
+  <symbol id="icon-economy" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8"/>
+    <path d="M12 7v10"/>
+    <path d="M14.5 9.5c0-1.1-1.1-2-2.5-2s-2.5.9-2.5 2 1.1 2 2.5 2 2.5.9 2.5 2-1.1 2-2.5 2-2.5-.9-2.5-2"/>
+  </symbol>
+
+  <symbol id="icon-shop" viewBox="0 0 24 24">
+    <path d="M4 10h16"/>
+    <path d="M5 10v8h14v-8"/>
+    <path d="M6 6h12l1 4H5z"/>
+    <path d="M9 18v-4h6v4"/>
+  </symbol>
+
+  <symbol id="icon-event" viewBox="0 0 24 24">
+    <path d="M12 4v3"/>
+    <path d="M12 17v3"/>
+    <path d="M4 12h3"/>
+    <path d="M17 12h3"/>
+    <path d="m6.5 6.5 2.1 2.1"/>
+    <path d="m15.4 15.4 2.1 2.1"/>
+    <path d="m17.5 6.5-2.1 2.1"/>
+    <path d="m8.6 15.4-2.1 2.1"/>
+    <circle cx="12" cy="12" r="2.2"/>
+  </symbol>
+
+  <symbol id="icon-shield" viewBox="0 0 24 24">
+    <path d="M12 3 19 6v5c0 4.9-3.2 8.6-7 10-3.8-1.4-7-5.1-7-10V6z"/>
+  </symbol>
+
+  <symbol id="icon-device" viewBox="0 0 24 24">
+    <rect x="6" y="3.5" width="12" height="17" rx="2"/>
+    <path d="M10 6h4"/>
+    <circle cx="12" cy="17" r="1"/>
+  </symbol>
+
+  <symbol id="icon-gift" viewBox="0 0 24 24">
+    <rect x="4" y="10" width="16" height="10" rx="2"/>
+    <path d="M12 4v16"/>
+    <path d="M4 10h16"/>
+    <path d="M7 7c0-1.7 1.3-3 3-3 1.8 0 2.8 1.2 3 3v3H9c-1.1 0-2-.9-2-2z"/>
+    <path d="M17 7c0-1.7-1.3-3-3-3-1.8 0-2.8 1.2-3 3v3h4c1.1 0 2-.9 2-2z"/>
+  </symbol>
+
+  <symbol id="icon-diamond" viewBox="0 0 24 24">
+    <path d="M6 8h12l-6 12z"/>
+    <path d="M6 8 9 4h6l3 4"/>
+    <path d="M9 4 12 20 15 4"/>
+  </symbol>
+
+  <symbol id="icon-guardian" viewBox="0 0 24 24">
+    <path d="M12 3 19 6v5c0 4.9-3.2 8.6-7 10-3.8-1.4-7-5.1-7-10V6z"/>
+    <path d="m9.5 12 1.8 1.8L14.8 10"/>
+  </symbol>
+
+  <symbol id="icon-mystic" viewBox="0 0 24 24">
+    <circle cx="12" cy="10.5" r="4.5"/>
+    <path d="M8.5 18h7"/>
+    <path d="M10 15h4"/>
+    <path d="M9.8 9.8 12 7.6l2.2 2.2-2.2 2.2z"/>
+  </symbol>
+
+  <symbol id="icon-astral" viewBox="0 0 24 24">
+    <path d="m5 15 5.2-5.2 2.7 2.7 6.1-6.1"/>
+    <path d="M14.5 6.4h4.1v4.1"/>
+    <path d="m6 18 2.2-2.2"/>
+    <path d="m14 18 2.2-2.2"/>
+  </symbol>
+
+  <symbol id="icon-cosmic" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="12" rx="5.8" ry="3"/>
+    <circle cx="12" cy="12" r="4"/>
+    <path d="M4 13c2.6-3.5 10.4-6.2 16-5"/>
+  </symbol>
+
+  <symbol id="icon-legacy" viewBox="0 0 24 24">
+    <path d="M4 17h16"/>
+    <path d="M6 17V9l4 3 2-6 2 6 4-3v8"/>
+    <path d="M6 17h12"/>
+  </symbol>
+
+  <symbol id="icon-ticket" viewBox="0 0 24 24">
+    <path d="M4 7h16v3a2 2 0 1 0 0 4v3H4v-3a2 2 0 1 0 0-4z"/>
+    <path d="M12 7v10"/>
+  </symbol>
+
+  <symbol id="icon-warning" viewBox="0 0 24 24">
+    <path d="M12 4 3.5 19h17z"/>
+    <path d="M12 9v4"/>
+    <circle cx="12" cy="16" r="1"/>
+  </symbol>
+
+  <symbol id="icon-chat" viewBox="0 0 24 24">
+    <path d="M4 6h16v9H9l-4 3v-3H4z"/>
+    <path d="M8 10h8"/>
+    <path d="M8 13h5"/>
+  </symbol>
+
+  <symbol id="icon-mute" viewBox="0 0 24 24">
+    <path d="M5 10v4h4l5 4V6l-5 4z"/>
+    <path d="m16 9 3 3"/>
+    <path d="m19 9-3 3"/>
+  </symbol>
+
+  <symbol id="icon-build" viewBox="0 0 24 24">
+    <path d="M14 4 8 10l2 2-4 4v2h2l4-4 2 2 6-6-2-2-2 2-2-2 2-2z"/>
+  </symbol>
+
+  <symbol id="icon-money" viewBox="0 0 24 24">
+    <ellipse cx="10" cy="8" rx="5" ry="2.5"/>
+    <path d="M5 8v4c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V8"/>
+    <path d="M5 12v4c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-4"/>
+    <path d="M17 10h2l1.5 2-1.5 2h-2"/>
+  </symbol>
+
+  <symbol id="icon-announcement" viewBox="0 0 24 24">
+    <path d="M4 11h4l8-4v10l-8-4H4z"/>
+    <path d="M6 15v3"/>
+    <path d="M16.5 8.5c1.1 1.1 1.1 2.9 0 4"/>
+    <path d="M18.5 6.5c2.2 2.2 2.2 5.8 0 8"/>
+  </symbol>
+
+  <symbol id="icon-profile" viewBox="0 0 24 24">
+    <circle cx="12" cy="9" r="4"/>
+    <path d="M5.5 19a6.5 6.5 0 0 1 13 0"/>
+  </symbol>
+
+  <symbol id="icon-wave" viewBox="0 0 24 24">
+    <path d="M8 13v-3a1 1 0 1 1 2 0v2"/>
+    <path d="M10 12v-4a1 1 0 1 1 2 0v3"/>
+    <path d="M12 11V6a1 1 0 1 1 2 0v5"/>
+    <path d="M14 11V8a1 1 0 1 1 2 0v7c0 2.2-1.8 4-4 4H11l-4-4v-2l2 1h2"/>
+  </symbol>
+
+  <symbol id="icon-close" viewBox="0 0 24 24">
+    <path d="m6 6 12 12"/>
+    <path d="m18 6-12 12"/>
+  </symbol>
+
+  <symbol id="icon-success" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8"/>
+    <path d="m8.5 12 2.2 2.2 4.8-5"/>
+  </symbol>
+
+  <symbol id="icon-error" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8"/>
+    <path d="m9 9 6 6"/>
+    <path d="m15 9-6 6"/>
+  </symbol>
+
+  <symbol id="icon-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8"/>
+    <path d="M12 11v5"/>
+    <path d="M12 8.2h.01"/>
+  </symbol>
+</svg>

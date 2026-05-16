@@ -1,0 +1,14 @@
+{
+  "name": "skyrealm-website",
+  "version": "1.0.0",
+  "description": "Official website for Sky Realms SMP Minecraft server",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.44.0"
+  },
+  "scripts": {
+    "test:ui": "playwright test",
+    "test:ui:headed": "playwright test --headed",
+    "test:ui:debug": "playwright test --debug"
+  }
+}

@@ -50,7 +50,49 @@
             <input id="storeSearch" class="store-search-input" type="search" placeholder="Search monthly rank plans...">
         </div>
         <p class="chat-widget-note">Orders are currently handled manually. Use the <strong>Discord chat bubble</strong> for checkout help.</p>
-        <p class="store-rank-ladder" aria-label="Rank progression">💎 Diamond → 🛡️ Guardian → 🔮 Mystic → 🌠 Astral → 🌌 Cosmic → 👑 Legacy</p>
+        <p class="store-rank-ladder" aria-label="Rank progression">
+            <span class="store-rank-ladder-item">
+                <span class="custom-emoji" style="width: 24px; height: 24px; background: transparent; border: none; box-shadow: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M11 3 8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>
+                </span>
+                <span>Diamond</span>
+            </span>
+            <span class="store-rank-ladder-separator">→</span>
+            <span class="store-rank-ladder-item">
+                <span class="custom-emoji" style="width: 24px; height: 24px; background: transparent; border: none; box-shadow: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </span>
+                <span>Guardian</span>
+            </span>
+            <span class="store-rank-ladder-separator">→</span>
+            <span class="store-rank-ladder-item">
+                <span class="custom-emoji" style="width: 24px; height: 24px; background: transparent; border: none; box-shadow: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+                </span>
+                <span>Mystic</span>
+            </span>
+            <span class="store-rank-ladder-separator">→</span>
+            <span class="store-rank-ladder-item">
+                <span class="custom-emoji" style="width: 24px; height: 24px; background: transparent; border: none; box-shadow: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="M2 12h20"/><path d="m19.07 4.93-14.14 14.14"/></svg>
+                </span>
+                <span>Astral</span>
+            </span>
+            <span class="store-rank-ladder-separator">→</span>
+            <span class="store-rank-ladder-item">
+                <span class="custom-emoji" style="width: 24px; height: 24px; background: transparent; border: none; box-shadow: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                </span>
+                <span>Cosmic</span>
+            </span>
+            <span class="store-rank-ladder-separator">→</span>
+            <span class="store-rank-ladder-item">
+                <span class="custom-emoji" style="width: 24px; height: 24px; background: transparent; border: none; box-shadow: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.133 5.55a.5.5 0 0 1 .798.519l-2.834 14.99a1 1 0 0 1-.98.814H5.883a1 1 0 0 1-.98-.814L2.069 6.07a.5.5 0 0 1 .798-.519l4.227 3.614a1 1 0 0 0 1.516-.294l2.952-5.604Z"/></svg>
+                </span>
+                <span>Legacy</span>
+            </span>
+        </p>
     </header>
 
     <!-- Category Filters -->
@@ -62,7 +104,11 @@
     <div class="store-grid">
         <!-- Ranks -->
         <div class="store-item" data-category="ranks">
-            <div class="store-item-image">💎</div>
+            <div class="store-item-image">
+                <div class="custom-emoji custom-emoji--xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M11 3 8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>
+                </div>
+            </div>
             <div class="store-item-content">
                 <h3 class="store-item-name">Diamond Rank</h3>
                 <div class="store-item-plan">Monthly Plan</div>
@@ -82,7 +128,11 @@
         </div>
 
         <div class="store-item store-item--popular" data-category="ranks">
-            <div class="store-item-image">🛡️</div>
+            <div class="store-item-image">
+                <div class="custom-emoji custom-emoji--xl custom-emoji--cyan">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+            </div>
             <div class="store-item-content">
                 <span class="store-item-badge">Most Popular</span>
                 <h3 class="store-item-name">Guardian Rank</h3>
@@ -103,7 +153,11 @@
         </div>
 
         <div class="store-item" data-category="ranks">
-            <div class="store-item-image">🔮</div>
+            <div class="store-item-image">
+                <div class="custom-emoji custom-emoji--xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+                </div>
+            </div>
             <div class="store-item-content">
                 <h3 class="store-item-name">Mystic Rank</h3>
                 <div class="store-item-plan">Monthly Plan</div>
@@ -123,7 +177,11 @@
         </div>
 
         <div class="store-item" data-category="ranks">
-            <div class="store-item-image">🌠</div>
+            <div class="store-item-image">
+                <div class="custom-emoji custom-emoji--xl custom-emoji--cyan">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="M2 12h20"/><path d="m19.07 4.93-14.14 14.14"/></svg>
+                </div>
+            </div>
             <div class="store-item-content">
                 <h3 class="store-item-name">Astral Rank</h3>
                 <div class="store-item-plan">Monthly Plan</div>
@@ -143,7 +201,11 @@
         </div>
 
         <div class="store-item" data-category="ranks">
-            <div class="store-item-image">🌌</div>
+            <div class="store-item-image">
+                <div class="custom-emoji custom-emoji--xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                </div>
+            </div>
             <div class="store-item-content">
                 <h3 class="store-item-name">Cosmic Rank</h3>
                 <div class="store-item-plan">Monthly Plan</div>
@@ -163,7 +225,11 @@
         </div>
 
         <div class="store-item store-item--ultimate" data-category="ranks">
-            <div class="store-item-image">👑</div>
+            <div class="store-item-image">
+                <div class="custom-emoji custom-emoji--xl custom-emoji--yellow">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.133 5.55a.5.5 0 0 1 .798.519l-2.834 14.99a1 1 0 0 1-.98.814H5.883a1 1 0 0 1-.98-.814L2.069 6.07a.5.5 0 0 1 .798-.519l4.227 3.614a1 1 0 0 0 1.516-.294l2.952-5.604Z"/></svg>
+                </div>
+            </div>
             <div class="store-item-content">
                 <span class="store-item-badge store-item-badge--ultimate">Ultimate</span>
                 <h3 class="store-item-name">Legacy Rank</h3>
@@ -183,6 +249,7 @@
                 </div>
             </div>
         </div>
+
 
     </div>
     <div class="store-empty-state" id="storeEmptyState" hidden>
